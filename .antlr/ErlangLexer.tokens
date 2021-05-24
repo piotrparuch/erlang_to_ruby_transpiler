@@ -1,0 +1,9 @@
+AtomToken=1
+VarToken=2
+FloatToken=3
+IntegerToken=4
+CharToken=5
+StringToken=6
+AttrName=7
+Comment=8
+WS=9
