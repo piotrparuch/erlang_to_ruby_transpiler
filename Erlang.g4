@@ -1,32 +1,45 @@
 grammar Erlang;
 
-//forms : form+ EOF ;
-
 fragment DGT : [0-9] ;
 
 fragment UPPER : [A-Z] ;
 
 fragment LOWER : [a-z] ;
 
-atomToken : AtomToken ;
-AtomToken : LOWER (DGT | LOWER | UPPER | '_' | '@')*
+Atom : LOWER (DGT | LOWER | UPPER | '_' | '@')*
           | '\'' ( '\\' (~'\\'|'\\') | ~[\\'] )* '\'' ;
 
-varToken : VarToken ;
-VarToken : (UPPER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
+Type : (Integer | Char | String | Float | List | Tuple) ;
 
-floatToken : FloatToken ;
-FloatToken : '-'? DGT+ '.' DGT+  ([Ee] [+-]? DGT+)? ;
+Var : (UPPER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
 
-integerToken : IntegerToken ;
-IntegerToken : '-'? DGT+ ('#' (DGT | [a-zA-Z])+)? ;
+Op : ('+' | '-' | '*' | '/' | '>' | '>=' | '<' | '<=' | '==' | '/=') ;
 
-charToken : CharToken ;
-CharToken : '$' ('\\'? ~[\r\n] | '\\' DGT DGT DGT) ;
+Float : '-'? DGT+ '.' DGT+  ([Ee] [+-]? DGT+)? ;
 
-stringToken : StringToken ;
-StringToken : '"' ( '\\' (~'\\'|'\\') | ~[\\"] )* '"' ;
+Integer : '-'? DGT+ ('#' (DGT | [a-zA-Z])+)? ;
 
-AttrName : '-' ('spec' | 'callback') ;
+Char : '$' ('\\'? ~[\r\n] | '\\' DGT DGT DGT) ;
+
+String : '"' ( '\\' (~'\\'|'\\') | ~[\\"] )* '"' ;
+
+List : '['(Type? ','?)*']' ; 
+
+Tuple : '{'(Type? ','?)*'}' ;
+
 Comment : '%' ~[\r\n]* '\r'? '\n' -> skip ;
 WS : [\u0000-\u0020\u0080-\u00a0]+ -> skip ;
+
+Endl : (',' | '.' | ';') ;
+
+declaration : Var '=' Type Endl ;
+
+// module : '-module(' LOWER* ')'
+
+expr : (Type | func) (Op (Type | func))? ;
+
+func : ('_' | LOWER) (LOWER | UPPER | DGT | '_' | '@')* '(' (expr ','?)* ')' ;
+
+// ? rek
+funcDec : func ('when' expr)? '->' (expr Endl)* funcDec* ;
+
