@@ -32,9 +32,13 @@ WS : [\u0000-\u0020\u0080-\u00a0]+ -> skip ;
 
 Endl : (',' | '.' | ';') ;
 
+program: module compile funcDec* ;
+
 declaration : Var '=' Type Endl ;
 
-// module : '-module(' LOWER* ')'
+module : '-module(' (LOWER | '_')* ').' ;
+
+compile : '-compile(export_all).' ;
 
 expr : (Type | func) (Op (Type | func))? ;
 
