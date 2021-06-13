@@ -16,7 +16,7 @@ public class ErlangToRubyTranspiler {
 
         CommonTokenStream tokens = new CommonTokenStream(tokenizer);
         ErlangParser parser = new ErlangParser(tokens);
-        ParseTree tree = parser.declaration();
+        ParseTree tree = parser.program();
         ParseTreeWalker walker = new ParseTreeWalker();
         ErlangBaseListenerChild listener = new ErlangBaseListenerChild();
         walker.walk(listener, tree);

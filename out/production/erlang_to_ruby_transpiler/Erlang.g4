@@ -1,10 +1,12 @@
 grammar Erlang;
 
-fragment DGT : [0-9] ;
+program: module? compile? funcDec* EOF;
 
-fragment UPPER : [A-Z] ;
+DGT : [0-9] ;
 
-fragment LOWER : [a-z] ;
+UPPER : [A-Z] ;
+
+LOWER : [a-z] ;
 
 Atom : LOWER (DGT | LOWER | UPPER | '_' | '@')*
           | '\'' ( '\\' (~'\\'|'\\') | ~[\\'] )* '\'' ;
@@ -31,8 +33,6 @@ Comment : '%' ~[\r\n]* '\r'? '\n' -> skip ;
 WS : [\u0000-\u0020\u0080-\u00a0]+ -> skip ;
 
 Endl : (',' | '.' | ';') ;
-
-program: module compile funcDec* ;
 
 declaration : Var '=' Type Endl ;
 

@@ -2,11 +2,11 @@ grammar Erlang;
 
 program: module? compile? funcDec* EOF;
 
-fragment DGT : [0-9] ;
+DGT : [0-9] ;
 
-fragment UPPER : [A-Z] ;
+UPPER : [A-Z] ;
 
-fragment LOWER : [a-z] ;
+LOWER : [a-z] ;
 
 Atom : LOWER (DGT | LOWER | UPPER | '_' | '@')*
           | '\'' ( '\\' (~'\\'|'\\') | ~[\\'] )* '\'' ;

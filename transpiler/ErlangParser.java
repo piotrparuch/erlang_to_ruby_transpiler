@@ -17,9 +17,9 @@ public class ErlangParser extends Parser {
 		new PredictionContextCache();
 	public static final int
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
-		T__9=10, T__10=11, Atom=12, Type=13, Var=14, Op=15, Float=16, Integer=17, 
-		Char=18, String=19, List=20, Tuple=21, Comment=22, WS=23, Endl=24, LOWER=25, 
-		UPPER=26, DGT=27;
+		T__9=10, T__10=11, DGT=12, UPPER=13, LOWER=14, Atom=15, Type=16, Var=17, 
+		Op=18, Float=19, Integer=20, Char=21, String=22, List=23, Tuple=24, Comment=25, 
+		WS=26, Endl=27;
 	public static final int
 		RULE_program = 0, RULE_declaration = 1, RULE_module = 2, RULE_compile = 3, 
 		RULE_expr = 4, RULE_func = 5, RULE_funcDec = 6;
@@ -40,8 +40,8 @@ public class ErlangParser extends Parser {
 	private static String[] makeSymbolicNames() {
 		return new String[] {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			"Atom", "Type", "Var", "Op", "Float", "Integer", "Char", "String", "List", 
-			"Tuple", "Comment", "WS", "Endl", "LOWER", "UPPER", "DGT"
+			"DGT", "UPPER", "LOWER", "Atom", "Type", "Var", "Op", "Float", "Integer", 
+			"Char", "String", "List", "Tuple", "Comment", "WS", "Endl"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -472,12 +472,12 @@ public class ErlangParser extends Parser {
 			setState(59);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << LOWER) | (1L << UPPER) | (1L << DGT))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << DGT) | (1L << UPPER) | (1L << LOWER))) != 0)) {
 				{
 				{
 				setState(56);
 				_la = _input.LA(1);
-				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << LOWER) | (1L << UPPER) | (1L << DGT))) != 0)) ) {
+				if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << T__5) | (1L << DGT) | (1L << UPPER) | (1L << LOWER))) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -496,7 +496,7 @@ public class ErlangParser extends Parser {
 			setState(69);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << Type) | (1L << LOWER))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__2) | (1L << LOWER) | (1L << Type))) != 0)) {
 				{
 				{
 				setState(63);
@@ -645,22 +645,22 @@ public class ErlangParser extends Parser {
 		"\6\5\6\66\n\6\5\68\n\6\3\7\3\7\7\7<\n\7\f\7\16\7?\13\7\3\7\3\7\3\7\5\7"+
 		"D\n\7\7\7F\n\7\f\7\16\7I\13\7\3\7\3\7\3\b\3\b\3\b\5\bP\n\b\3\b\3\b\3\b"+
 		"\3\b\7\bV\n\b\f\b\16\bY\13\b\3\b\7\b\\\n\b\f\b\16\b_\13\b\3\b\2\2\t\2"+
-		"\4\6\b\n\f\16\2\4\4\2\5\5\33\33\5\2\5\5\b\b\33\35\2f\2\21\3\2\2\2\4\36"+
+		"\4\6\b\n\f\16\2\4\4\2\5\5\20\20\5\2\5\5\b\b\16\20\2f\2\21\3\2\2\2\4\36"+
 		"\3\2\2\2\6#\3\2\2\2\b,\3\2\2\2\n\60\3\2\2\2\f9\3\2\2\2\16L\3\2\2\2\20"+
 		"\22\5\6\4\2\21\20\3\2\2\2\21\22\3\2\2\2\22\24\3\2\2\2\23\25\5\b\5\2\24"+
 		"\23\3\2\2\2\24\25\3\2\2\2\25\31\3\2\2\2\26\30\5\16\b\2\27\26\3\2\2\2\30"+
 		"\33\3\2\2\2\31\27\3\2\2\2\31\32\3\2\2\2\32\34\3\2\2\2\33\31\3\2\2\2\34"+
-		"\35\7\2\2\3\35\3\3\2\2\2\36\37\7\20\2\2\37 \7\3\2\2 !\7\17\2\2!\"\7\32"+
+		"\35\7\2\2\3\35\3\3\2\2\2\36\37\7\23\2\2\37 \7\3\2\2 !\7\22\2\2!\"\7\35"+
 		"\2\2\"\5\3\2\2\2#\'\7\4\2\2$&\t\2\2\2%$\3\2\2\2&)\3\2\2\2\'%\3\2\2\2\'"+
 		"(\3\2\2\2(*\3\2\2\2)\'\3\2\2\2*+\7\6\2\2+\7\3\2\2\2,-\7\7\2\2-\t\3\2\2"+
-		"\2.\61\7\17\2\2/\61\5\f\7\2\60.\3\2\2\2\60/\3\2\2\2\61\67\3\2\2\2\62\65"+
-		"\7\21\2\2\63\66\7\17\2\2\64\66\5\f\7\2\65\63\3\2\2\2\65\64\3\2\2\2\66"+
+		"\2.\61\7\22\2\2/\61\5\f\7\2\60.\3\2\2\2\60/\3\2\2\2\61\67\3\2\2\2\62\65"+
+		"\7\24\2\2\63\66\7\22\2\2\64\66\5\f\7\2\65\63\3\2\2\2\65\64\3\2\2\2\66"+
 		"8\3\2\2\2\67\62\3\2\2\2\678\3\2\2\28\13\3\2\2\29=\t\2\2\2:<\t\3\2\2;:"+
 		"\3\2\2\2<?\3\2\2\2=;\3\2\2\2=>\3\2\2\2>@\3\2\2\2?=\3\2\2\2@G\7\t\2\2A"+
 		"C\5\n\6\2BD\7\n\2\2CB\3\2\2\2CD\3\2\2\2DF\3\2\2\2EA\3\2\2\2FI\3\2\2\2"+
 		"GE\3\2\2\2GH\3\2\2\2HJ\3\2\2\2IG\3\2\2\2JK\7\13\2\2K\r\3\2\2\2LO\5\f\7"+
 		"\2MN\7\f\2\2NP\5\n\6\2OM\3\2\2\2OP\3\2\2\2PQ\3\2\2\2QW\7\r\2\2RS\5\n\6"+
-		"\2ST\7\32\2\2TV\3\2\2\2UR\3\2\2\2VY\3\2\2\2WU\3\2\2\2WX\3\2\2\2X]\3\2"+
+		"\2ST\7\35\2\2TV\3\2\2\2UR\3\2\2\2VY\3\2\2\2WU\3\2\2\2WX\3\2\2\2X]\3\2"+
 		"\2\2YW\3\2\2\2Z\\\5\16\b\2[Z\3\2\2\2\\_\3\2\2\2][\3\2\2\2]^\3\2\2\2^\17"+
 		"\3\2\2\2_]\3\2\2\2\17\21\24\31\'\60\65\67=CGOW]";
 	public static final ATN _ATN =
