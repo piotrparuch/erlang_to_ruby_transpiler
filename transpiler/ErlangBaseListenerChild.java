@@ -11,101 +11,93 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     public void add_code(String code){
         ruby_code += code;
     }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterProgram(ErlangParser.ProgramContext ctx) {
-        enterModule(ctx.module());
-        enterCompile(ctx.compile());
-        for (ErlangParser.FuncDecContext context: ctx.funcDec()) {
-            enterFuncDec(context);
-        }
 
+    @Override public void enterProgram(ErlangParser.ProgramContext ctx) {
+        System.out.println("elo");
+        listenModule(ctx.module());
+        listenCompile(ctx.compile());
+        for (ErlangParser.FuncDecContext context: ctx.funcDec()) {
+            listenFuncDec(context);
+        }
     }
 
 
    @Override public void exitProgram(ErlangParser.ProgramContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
 
-    @Override public void enterModule(ErlangParser.ModuleContext ctx){
+
+    public void listenModule(ErlangParser.ModuleContext ctx){
 
     }
 
-    @Override public void enterDeclaration(ErlangParser.DeclarationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitDeclaration(ErlangParser.DeclarationContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterExpr(ErlangParser.ExprContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitExpr(ErlangParser.ExprContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterFunc(ErlangParser.FuncContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitFunc(ErlangParser.FuncContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterFuncDec(ErlangParser.FuncDecContext ctx) {
-        ruby_code += "essasito";
-    }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitFuncDec(ErlangParser.FuncDecContext ctx) { }
+    public void listenCompile(ErlangParser.CompileContext ctx){
 
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void enterEveryRule(ParserRuleContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void exitEveryRule(ParserRuleContext ctx) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
-    @Override public void visitTerminal(TerminalNode node) { }
-    /**
-     * {@inheritDoc}
-     *
-     * <p>The default implementation does nothing.</p>
-     */
+    }
+
+    public void listenDeclaration(ErlangParser.DeclarationContext ctx) {
+
+    }
+
+    public void listenExpr(ErlangParser.ExprContext ctx) {
+        ruby_code += ctx.getText();
+    }
+
+    public void listenFunc(ErlangParser.FuncContext ctx) { }
+
+    public void listenRead(ErlangParser.ReadContext ctx){
+        ruby_code += "gets.chomp(";
+        ruby_code += ctx.String().getText();
+        ruby_code += ")";
+    }
+
+    public void listenPrint(ErlangParser.PrintContext ctx){
+        ruby_code += "puts(";
+        String text = ctx.String().getText();
+        int varIndex = ctx.String().getText().indexOf("~w");
+        int separatorIndex = text.indexOf(",");
+        String varName = text.substring(separatorIndex + 3);
+        ruby_code += text.substring(0, varIndex);
+        ruby_code += "#{";
+        ruby_code += varName;
+        ruby_code += "}";
+        ruby_code += text.substring(varIndex + 2, separatorIndex);
+        ruby_code += ")";
+    }
+
+    public void listenBody(ErlangParser.BodyContext ctx) {
+//        System.out.println(ctx.getRuleContext());
+//        for (int i=0;i<=ctx.getRuleContexts().size();) {
+//
+//        }
+//        if (ctx.getRuleContext() instanceof ErlangParser.ExprContext){
+//            listenExpr(ctx.expr());
+//        }
+//        else if(ctx.getRuleContext() instanceof ErlangParser.DeclarationContext){
+//            listenDeclaration(ctx.declaration());
+//        }
+//        else if(ctx.getRuleContext() instanceof ErlangParser.PrintContext){
+//            listenPrint(ctx.print());
+//        }
+    }
+
+    public void listenFuncDec(ErlangParser.FuncDecContext ctx) {
+        ruby_code += "def ";
+        ruby_code += ctx.func(0).funcName().Module_name().getText()+"(";
+        for (ErlangParser.ExprContext expr: ctx.func(0).funcName().expr()) {
+            ruby_code += "";
+        }
+        ruby_code += ")";
+        ruby_code += "\n";
+        ruby_code += "  ";
+        listenBody(ctx.func(0).body());
+        ruby_code += "end";
+        ruby_code += "\n";
+        ruby_code += "\n";
+    }
+
+    public void listenEveryRule(ParserRuleContext ctx) { }
+
+    public void listenTerminal(TerminalNode node) { }
+
     @Override public void visitErrorNode(ErrorNode node) { }
 
 }

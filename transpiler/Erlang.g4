@@ -4,9 +4,11 @@ program: module? compile? funcDec* EOF;
 
 DGT : [0-9] ;
 
-UPPER : [A-Z] ;
+fragment UPPER : [A-Z] ;
 
-LOWER : [a-z] ;
+fragment LOWER : [a-z] ;
+
+Module_name: (LOWER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
 
 Atom : LOWER (DGT | LOWER | UPPER | '_' | '@')*
           | '\'' ( '\\' (~'\\'|'\\') | ~[\\'] )* '\'' ;
@@ -25,25 +27,41 @@ Char : '$' ('\\'? ~[\r\n] | '\\' DGT DGT DGT) ;
 
 String : '"' ( '\\' (~'\\'|'\\') | ~[\\"] )* '"' ;
 
-List : '['(Type? ','?)*']' ; 
+OK : 'ok' ;
 
-Tuple : '{'(Type? ','?)*'}' ;
+//String : '"' (DGT | LOWER | UPPER | '_' | '@')* '"';
+
+List : '['((Type | Var | OK)? ','?)*']' ;
+
+Tuple : '{'((Type | Var | OK)? ','?)*'}' ;
+
+Input : 'io:read' ;
+
+Output : 'io:format';
 
 Comment : '%' ~[\r\n]* '\r'? '\n' -> skip ;
 WS : [\u0000-\u0020\u0080-\u00a0]+ -> skip ;
 
 Endl : (',' | '.' | ';') ;
 
-declaration : Var '=' Type Endl ;
+declaration : (Var | Tuple | List) '=' (Type | read) ;
 
-module : '-module(' (LOWER | '_')* ').' ;
+module : '-module(' Module_name ').' ;
 
 compile : '-compile(export_all).' ;
 
-expr : (Type | func) (Op (Type | func))? ;
+read : Input '(' String ')' ;
 
-func : ('_' | LOWER) (LOWER | UPPER | DGT | '_' | '@')* '(' (expr ','?)* ')' ;
+print : Output '(' String (',' (Type | Var))* ')' ;
 
-// ? rek
-funcDec : func ('when' expr)? '->' (expr Endl)* funcDec* ;
+expr : (Type | func | DGT) (Op (Type | func))? ;
 
+funcName : Module_name '(' (expr ','?)* ')' ;
+
+guard : 'when' expr ;
+
+body : ((expr | declaration | print) Endl)*;
+
+func: funcName guard? '->' body;
+
+funcDec : func (';' func)* ;

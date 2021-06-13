@@ -47,6 +47,26 @@ public interface ErlangListener extends ParseTreeListener {
 	 */
 	void exitCompile(ErlangParser.CompileContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ErlangParser#read}.
+	 * @param ctx the parse tree
+	 */
+	void enterRead(ErlangParser.ReadContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#read}.
+	 * @param ctx the parse tree
+	 */
+	void exitRead(ErlangParser.ReadContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void enterPrint(ErlangParser.PrintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#print}.
+	 * @param ctx the parse tree
+	 */
+	void exitPrint(ErlangParser.PrintContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ErlangParser#expr}.
 	 * @param ctx the parse tree
 	 */
@@ -56,6 +76,36 @@ public interface ErlangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpr(ErlangParser.ExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#funcName}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncName(ErlangParser.FuncNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#funcName}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncName(ErlangParser.FuncNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#guard}.
+	 * @param ctx the parse tree
+	 */
+	void enterGuard(ErlangParser.GuardContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#guard}.
+	 * @param ctx the parse tree
+	 */
+	void exitGuard(ErlangParser.GuardContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#body}.
+	 * @param ctx the parse tree
+	 */
+	void enterBody(ErlangParser.BodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#body}.
+	 * @param ctx the parse tree
+	 */
+	void exitBody(ErlangParser.BodyContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ErlangParser#func}.
 	 * @param ctx the parse tree
