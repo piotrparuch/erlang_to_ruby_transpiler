@@ -18,7 +18,7 @@ Name: (LOWER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
 
 Var : (UPPER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
 
-Op : '+' | '-' | '*' | '/' | '>' | '>=' | '<' | '<=' | '==' | '/=' ;
+Op : '+' | '-' | '*' | '/' | '>' | '>=' | '<' | '=<' | '==' | '/=' ;
 
 Integer : '0' | ([1-9][0-9]*);
 
@@ -53,7 +53,7 @@ print : Output '(' (type | funcName) (',' (type | Var | list))* ')' ;
 
 operation : (type | Var) Op (type | Var) ;
 
-list : '[' ((type | Var | OK) ','?)* ']' ;
+list : '[' ((type | Var | OK | funcName) ','?)* ']' ;
 
 tuple : '{' ((type | Var | OK) ','?)* '}' ;
 
@@ -65,9 +65,9 @@ arg : type | Var;
 
 funcName : Name '(' (arg ','?)* ')' ;
 
-guard : 'when' expr ;
+guard : 'when' expr (',' expr)* ;
 
-line : (expr | if_stat | funcName) ;
+line : (expr | if_stat | funcName | Name) ;
 
 body : (line ','?)* ;
 
