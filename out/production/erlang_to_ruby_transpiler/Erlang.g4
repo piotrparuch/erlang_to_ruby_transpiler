@@ -2,6 +2,10 @@ grammar Erlang;
 
 Dot : '.' ;
 
+Left_bracket : '(';
+
+Right_bracket : ')';
+
 OK : 'ok';
 
 Input : 'io:read' ;
@@ -39,9 +43,9 @@ program: module? compile? funcDec* EOF;
 
 type : Integer | Char | String | Float ;
 
-module : '-module(' Name ').' ;
+module : '-module' Left_bracket Name Right_bracket Dot ;
 
-compile : '-compile(export_all).' ;
+compile : '-compile' Left_bracket 'export_all' Right_bracket Dot ;
 
 read : Input '(' String ')' ;
 
