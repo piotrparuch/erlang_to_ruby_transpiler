@@ -67,7 +67,7 @@ funcName : Name '(' (arg ','?)* ')' ;
 
 guard : 'when' expr (',' expr)* ;
 
-line : (expr | if_stat | funcName | Name) ;
+line : (expr | if_stat | Name | funcName) ;
 
 body : (line ','?)* ;
 

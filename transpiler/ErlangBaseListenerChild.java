@@ -133,7 +133,14 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     public void listenOperation(ErlangParser.OperationContext ctx){
-        ruby_code += ctx.getText().toString().toLowerCase();
+        if (ctx.Op().getText().toString().equals("=<")){
+            String tmp = ctx.getText().toString().toLowerCase();
+            tmp = tmp.replace("=<", "<=");
+            ruby_code += tmp;
+        }
+        else{
+            ruby_code += ctx.getText().toString().toLowerCase();
+        }
     }
 
     public void listenBody(ErlangParser.BodyContext ctx) {
@@ -156,6 +163,10 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         if (ctx.funcName() != null){
             ruby_code += "return ";
             listenFuncName(ctx.funcName());
+        }
+        if (ctx.Name() != null){
+            ruby_code += ":";
+            ruby_code += ctx.Name().getText();
         }
     }
 
@@ -206,22 +217,67 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     public void listenFuncDec(ErlangParser.FuncDecContext ctx) {
-        for(int i=0;i<ctx.func().size();i++) {
-            ruby_code += "def ";
-            ruby_code += ctx.func(i).funcName().Name().getText() + "(";
-            for (ErlangParser.ArgContext arg : ctx.func(i).funcName().arg()) {
-                ruby_code += arg.getText().toLowerCase();
-                if (arg != ctx.func(i).funcName().arg().get(ctx.func(i).funcName().arg().size() - 1)) {
-                    ruby_code += ", ";
+        for (int i = 0; i < ctx.func().size(); i++) {
+            if (i == 0 || (!ctx.func(i).funcName().Name().getText().equals(ctx.func(i - 1).funcName().Name().getText()))) {
+                ruby_code += "def ";
+                ruby_code += ctx.func(i).funcName().Name().getText() + "(";
+                for (ErlangParser.ArgContext arg : ctx.func(i).funcName().arg()) {
+                    ruby_code += arg.getText().toLowerCase();
+                    if (arg != ctx.func(i).funcName().arg().get(ctx.func(i).funcName().arg().size() - 1)) {
+                        ruby_code += ", ";
+                    }
+                }
+                ruby_code += ")";
+                ruby_code += "\n";
+                if (ctx.func(i).guard() != null) {
+                    tabs += 1;
+                    add_tabs();
+                    if (ctx.func(i).guard().expr(0).operation() != null) {
+                        ruby_code += "case";
+//                        if (ctx.func(i).guard().expr(0).operation().type(0) != null){
+//                            ruby_code += ctx.func(i).guard().expr(0).operation().type(0).getText();
+//                        }
+                        ruby_code += "\n";
+                        add_tabs();
+                        ruby_code += "when ";
+                        for (int j = 0; j < ctx.func(i).guard().expr().size(); j++) {
+                            listenOperation(ctx.func(i).guard().expr(j).operation());
+                            if (j != ctx.func(i).guard().expr().size() - 1) {
+                                ruby_code += " and ";
+                            }
+                        }
+                    }
+                    ruby_code += "\n";
+                }
+                listenBody(ctx.func(i).body());
+            } else if (ctx.func(i).funcName().Name().getText().equals(ctx.func(i - 1).funcName().Name().getText())) {
+                if (ctx.func(i).guard() != null) {
+                    add_tabs();
+                    if (ctx.func(i).guard().expr(0).operation() != null) {
+//                        if (ctx.func(i).guard().expr(0).operation().type(0) != null){
+//                            ruby_code += ctx.func(i).guard().expr(0).operation().type(0).getText();
+//                        }
+                        ruby_code += "when ";
+                        for (int j = 0; j < ctx.func(i).guard().expr().size(); j++) {
+                            listenOperation(ctx.func(i).guard().expr(j).operation());
+                            if (j != ctx.func(i).guard().expr().size() - 1) {
+                                ruby_code += " and ";
+                            }
+                        }
+                    }
+                    ruby_code += "\n";
+                }
+                listenBody(ctx.func(i).body());
+                if (i == ctx.func().size() - 1 && ctx.func(i).guard() != null) {
+                    add_tabs();
+                    ruby_code += "end";
+                    ruby_code += "\n";
                 }
             }
-            ruby_code += ")";
-            ruby_code += "\n";
-            listenBody(ctx.func(i).body());
-            ruby_code += "end";
-            ruby_code += "\n";
-            ruby_code += "\n";
         }
+        ruby_code += "end";
+        ruby_code += "\n";
+        ruby_code += "\n";
     }
 
     public void listenMain(ErlangParser.MainContext ctx){

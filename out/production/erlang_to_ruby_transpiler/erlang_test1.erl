@@ -7,3 +7,6 @@ elo() ->
 elson(Gitara, Siema, 1) -> 1.
 
 eluwina() -> 1.
+
+main() ->
+  1.
