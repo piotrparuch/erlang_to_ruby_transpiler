@@ -13,7 +13,6 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     @Override public void enterProgram(ErlangParser.ProgramContext ctx) {
-        System.out.println("elo");
         listenModule(ctx.module());
         listenCompile(ctx.compile());
         for (ErlangParser.FuncDecContext context: ctx.funcDec()) {
@@ -34,11 +33,40 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     public void listenDeclaration(ErlangParser.DeclarationContext ctx) {
+        if (ctx.Var() != null){
 
+        }
+        if (ctx.tuple() != null){
+            listenTuple(ctx.tuple());
+            ruby_code += " = ";
+            if (ctx.read() != null){
+                listenRead(ctx.read());
+            }
+        }
+        if (ctx.list() != null){
+            listenList(ctx.list());
+        }
+    }
+
+    private void listenList(ErlangParser.ListContext ctx) {
+    }
+
+    private void listenTuple(ErlangParser.TupleContext ctx) {
+        if (ctx.children.get(1).toString().equals("ok")){
+            ruby_code += ctx.children.get(3);
+        }
     }
 
     public void listenExpr(ErlangParser.ExprContext ctx) {
-        ruby_code += ctx.getText();
+        if (ctx.operation() != null){
+            listenOperation(ctx.operation());
+        }
+        if (ctx.declaration() != null){
+            listenDeclaration(ctx.declaration());
+        }
+        if (ctx.print() != null){
+            listenPrint(ctx.print());
+        }
     }
 
     public void listenFunc(ErlangParser.FuncContext ctx) { }
@@ -59,36 +87,34 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         ruby_code += "#{";
         ruby_code += varName;
         ruby_code += "}";
-        ruby_code += text.substring(varIndex + 2, separatorIndex);
+        //ruby_code += text.substring(varIndex + 2, separatorIndex);
         ruby_code += ")";
     }
 
+    public void listenOperation(ErlangParser.OperationContext ctx){
+        ruby_code += ctx.getText();
+    }
+
     public void listenBody(ErlangParser.BodyContext ctx) {
-//        System.out.println(ctx.getRuleContext());
-//        for (int i=0;i<=ctx.getRuleContexts().size();) {
-//
-//        }
-//        if (ctx.getRuleContext() instanceof ErlangParser.ExprContext){
-//            listenExpr(ctx.expr());
-//        }
-//        else if(ctx.getRuleContext() instanceof ErlangParser.DeclarationContext){
-//            listenDeclaration(ctx.declaration());
-//        }
-//        else if(ctx.getRuleContext() instanceof ErlangParser.PrintContext){
-//            listenPrint(ctx.print());
-//        }
+        for (ErlangParser.ExprContext expr: ctx.expr()) {
+            listenExpr(expr);
+            ruby_code += "\n";
+        }
     }
 
     public void listenFuncDec(ErlangParser.FuncDecContext ctx) {
         ruby_code += "def ";
-        ruby_code += ctx.func(0).funcName().Module_name().getText()+"(";
-        for (ErlangParser.ExprContext expr: ctx.func(0).funcName().expr()) {
+        ruby_code += ctx.func(0).funcName().Name().getText()+"(";
+        for (ErlangParser.ArgContext arg: ctx.func(0).funcName().arg()) {
             ruby_code += "";
         }
         ruby_code += ")";
         ruby_code += "\n";
         ruby_code += "  ";
-        listenBody(ctx.func(0).body());
+        for (ErlangParser.FuncContext func: ctx.func()) {
+            listenBody(func.body());
+        }
+        ruby_code += "\n";
         ruby_code += "end";
         ruby_code += "\n";
         ruby_code += "\n";

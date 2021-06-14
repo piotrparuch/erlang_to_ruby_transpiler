@@ -1,8 +1,9 @@
 -module(erlang_test1).
 -compile(export_all).
 
-elo() -> 1.
+elo() ->
+  Elo.
 
 elson() -> 1.
 
-eluwina() -> 1.`
+eluwina() -> 1.

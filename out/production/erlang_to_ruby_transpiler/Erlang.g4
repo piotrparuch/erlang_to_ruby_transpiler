@@ -1,65 +1,70 @@
 grammar Erlang;
 
-program: module? compile? funcDec* EOF;
+fragment DGT : [0-9] ;
 
-DGT : [0-9] ;
+fragment NDGT : [a-zA-Z_] ;
 
 fragment UPPER : [A-Z] ;
 
 fragment LOWER : [a-z] ;
 
-Module_name: (LOWER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
+Dot : '.' ;
 
-Atom : LOWER (DGT | LOWER | UPPER | '_' | '@')*
-          | '\'' ( '\\' (~'\\'|'\\') | ~[\\'] )* '\'' ;
-
-Type : (Integer | Char | String | Float | List | Tuple) ;
-
-Var : (UPPER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
-
-Op : ('+' | '-' | '*' | '/' | '>' | '>=' | '<' | '<=' | '==' | '/=') ;
-
-Float : '-'? DGT+ '.' DGT+  ([Ee] [+-]? DGT+)? ;
-
-Integer : '-'? DGT+ ('#' (DGT | [a-zA-Z])+)? ;
-
-Char : '$' ('\\'? ~[\r\n] | '\\' DGT DGT DGT) ;
-
-String : '"' ( '\\' (~'\\'|'\\') | ~[\\"] )* '"' ;
-
-OK : 'ok' ;
-
-//String : '"' (DGT | LOWER | UPPER | '_' | '@')* '"';
-
-List : '['((Type | Var | OK)? ','?)*']' ;
-
-Tuple : '{'((Type | Var | OK)? ','?)*'}' ;
+OK : 'ok';
 
 Input : 'io:read' ;
 
 Output : 'io:format';
 
-Comment : '%' ~[\r\n]* '\r'? '\n' -> skip ;
-WS : [\u0000-\u0020\u0080-\u00a0]+ -> skip ;
+Endl : ',' | ';' ;
 
-Endl : (',' | '.' | ';') ;
+Name: (LOWER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
 
-declaration : (Var | Tuple | List) '=' (Type | read) ;
+Var : (UPPER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
 
-module : '-module(' Module_name ').' ;
+Op : '+' | '-' | '*' | '/' | '>' | '>=' | '<' | '<=' | '==' | '/=' ;
+
+Integer : '0' | ([1-9][0-9]*);
+
+Float : Integer Dot DGT+;
+
+String : '"' ( '\\"' | . )*? '"';
+
+Char: '\'' ( DGT | NDGT) '\'';
+
+Type : Integer | Char | String | Float ;
+
+WS : [ \t\r\n]+ -> skip ;
+Comment : '%' ~ [\r\n]*;
+
+program: module? compile? funcDec* EOF;
+
+module : '-module(' Name ').' ;
 
 compile : '-compile(export_all).' ;
 
 read : Input '(' String ')' ;
 
-print : Output '(' String (',' (Type | Var))* ')' ;
+print : Output '(' String (',' (Type | Var | list))* ')' ;
 
-expr : (Type | func | DGT) (Op (Type | func))? ;
+operation : Type Op Type ;
 
-func : Module_name '(' (expr ','?)* ')' ;
+list : '[' ((Type | Var | OK) ','?)* ']' ;
+
+tuple : '{' ((Type | Var | OK) ','?)* '}' ;
+
+declaration : (Var | tuple | list) '=' (Type | read);
+
+expr : operation | declaration | print ;
+
+arg : Type;
+
+funcName : Name '(' (arg ','?)* ')' ;
 
 guard : 'when' expr ;
 
-body : expr | declaration | print ;
+body : (expr ','?)* ;
 
-funcDec : func guard? '->' (body Endl)* ;
+func : funcName guard? '->' body ;
+
+funcDec : func (';' func)* Dot ;

@@ -17,16 +17,6 @@ public interface ErlangListener extends ParseTreeListener {
 	 */
 	void exitProgram(ErlangParser.ProgramContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link ErlangParser#declaration}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclaration(ErlangParser.DeclarationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link ErlangParser#declaration}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclaration(ErlangParser.DeclarationContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link ErlangParser#module}.
 	 * @param ctx the parse tree
 	 */
@@ -67,6 +57,46 @@ public interface ErlangListener extends ParseTreeListener {
 	 */
 	void exitPrint(ErlangParser.PrintContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ErlangParser#operation}.
+	 * @param ctx the parse tree
+	 */
+	void enterOperation(ErlangParser.OperationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#operation}.
+	 * @param ctx the parse tree
+	 */
+	void exitOperation(ErlangParser.OperationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#list}.
+	 * @param ctx the parse tree
+	 */
+	void enterList(ErlangParser.ListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#list}.
+	 * @param ctx the parse tree
+	 */
+	void exitList(ErlangParser.ListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#tuple}.
+	 * @param ctx the parse tree
+	 */
+	void enterTuple(ErlangParser.TupleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#tuple}.
+	 * @param ctx the parse tree
+	 */
+	void exitTuple(ErlangParser.TupleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclaration(ErlangParser.DeclarationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#declaration}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclaration(ErlangParser.DeclarationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ErlangParser#expr}.
 	 * @param ctx the parse tree
 	 */
@@ -76,6 +106,16 @@ public interface ErlangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpr(ErlangParser.ExprContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#arg}.
+	 * @param ctx the parse tree
+	 */
+	void enterArg(ErlangParser.ArgContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#arg}.
+	 * @param ctx the parse tree
+	 */
+	void exitArg(ErlangParser.ArgContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link ErlangParser#funcName}.
 	 * @param ctx the parse tree
