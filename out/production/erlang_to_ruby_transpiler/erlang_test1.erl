@@ -2,8 +2,8 @@
 -compile(export_all).
 
 elo() ->
-  Elo.
+  Elo = 1.
 
-elson() -> 1.
+elson(Gitara, Siema, 1) -> 1.
 
 eluwina() -> 1.

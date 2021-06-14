@@ -1,14 +1,10 @@
 grammar Erlang;
 
-fragment DGT : [0-9] ;
-
-fragment NDGT : [a-zA-Z_] ;
-
-fragment UPPER : [A-Z] ;
-
-fragment LOWER : [a-z] ;
-
 Dot : '.' ;
+
+Left_bracket : '(';
+
+Right_bracket : ')';
 
 OK : 'ok';
 
@@ -32,39 +28,52 @@ String : '"' ( '\\"' | . )*? '"';
 
 Char: '\'' ( DGT | NDGT) '\'';
 
-Type : Integer | Char | String | Float ;
+fragment DGT : [0-9] ;
+
+fragment NDGT : [a-zA-Z_] ;
+
+fragment UPPER : [A-Z] ;
+
+fragment LOWER : [a-z] ;
 
 WS : [ \t\r\n]+ -> skip ;
 Comment : '%' ~ [\r\n]*;
 
 program: module? compile? funcDec* EOF;
 
-module : '-module(' Name ').' ;
+type : Integer | Char | String | Float ;
 
-compile : '-compile(export_all).' ;
+module : '-module' Left_bracket Name Right_bracket Dot ;
+
+compile : '-compile' Left_bracket 'export_all' Right_bracket Dot ;
 
 read : Input '(' String ')' ;
 
-print : Output '(' String (',' (Type | Var | list))* ')' ;
+print : Output '(' String (',' (type | Var | list))* ')' ;
 
-operation : Type Op Type ;
+operation : (type | Var) Op (type | Var) ;
 
-list : '[' ((Type | Var | OK) ','?)* ']' ;
+list : '[' ((type | Var | OK) ','?)* ']' ;
 
-tuple : '{' ((Type | Var | OK) ','?)* '}' ;
+tuple : '{' ((type | Var | OK) ','?)* '}' ;
 
-declaration : (Var | tuple | list) '=' (Type | read);
+declaration : (Var | tuple | list) '=' (type | read);
 
-expr : operation | declaration | print ;
+expr : operation | declaration | print | type;
 
-arg : Type;
+arg : type | Var;
 
 funcName : Name '(' (arg ','?)* ')' ;
 
 guard : 'when' expr ;
 
-body : (expr ','?)* ;
+line : (expr | if_stat) ;
+
+body : (line ','?)* ;
+
+if_stat: 'if' (operation '->' expr ';')+ ('true' '->' expr)? 'end';
 
 func : funcName guard? '->' body ;
 
 funcDec : func (';' func)* Dot ;
+

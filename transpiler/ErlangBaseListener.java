@@ -27,6 +27,18 @@ public class ErlangBaseListener implements ErlangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterType(ErlangParser.TypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitType(ErlangParser.TypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterModule(ErlangParser.ModuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -171,6 +183,18 @@ public class ErlangBaseListener implements ErlangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLine(ErlangParser.LineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLine(ErlangParser.LineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBody(ErlangParser.BodyContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -178,6 +202,18 @@ public class ErlangBaseListener implements ErlangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBody(ErlangParser.BodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIf_stat(ErlangParser.If_statContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIf_stat(ErlangParser.If_statContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
