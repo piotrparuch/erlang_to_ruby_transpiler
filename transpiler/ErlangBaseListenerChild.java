@@ -42,7 +42,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
 
     public void listenDeclaration(ErlangParser.DeclarationContext ctx) {
         if (ctx.Var() != null){
-            ruby_code += ctx.Var().getText();
+            ruby_code += ctx.Var().getText().toLowerCase();
             ruby_code += " = ";
             if (ctx.read() != null){
                 listenRead(ctx.read());
@@ -67,7 +67,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     private void listenType(ErlangParser.TypeContext ctx) {
-        ruby_code += ctx.getText();
+        ruby_code += ctx.getText().toLowerCase();
     }
 
     private void listenList(ErlangParser.ListContext ctx) {
@@ -126,7 +126,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     public void listenOperation(ErlangParser.OperationContext ctx){
-        ruby_code += ctx.getText();
+        ruby_code += ctx.getText().toString().toLowerCase();
     }
 
     public void listenBody(ErlangParser.BodyContext ctx) {
@@ -202,7 +202,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         ruby_code += "def ";
         ruby_code += ctx.func(0).funcName().Name().getText()+"(";
         for (ErlangParser.ArgContext arg: ctx.func(0).funcName().arg()) {
-            ruby_code += arg.getText();
+            ruby_code += arg.getText().toLowerCase();
             if (arg != ctx.func(0).funcName().arg().get(ctx.func(0).funcName().arg().size()-1)){
                 ruby_code += ", ";
             }
