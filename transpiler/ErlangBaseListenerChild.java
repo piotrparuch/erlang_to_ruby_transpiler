@@ -243,7 +243,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
                         for (int j = 0; j < ctx.func(i).guard().expr().size(); j++) {
                             listenOperation(ctx.func(i).guard().expr(j).operation());
                             if (j != ctx.func(i).guard().expr().size() - 1) {
-                                ruby_code += " and ";
+                                ruby_code += "; ";
                             }
                         }
                     }
@@ -261,7 +261,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
                         for (int j = 0; j < ctx.func(i).guard().expr().size(); j++) {
                             listenOperation(ctx.func(i).guard().expr(j).operation());
                             if (j != ctx.func(i).guard().expr().size() - 1) {
-                                ruby_code += " and ";
+                                ruby_code += "; ";
                             }
                         }
                     }
