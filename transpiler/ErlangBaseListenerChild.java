@@ -71,11 +71,15 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     private void listenList(ErlangParser.ListContext ctx) {
+        ruby_code += ctx.getText();
     }
 
     private void listenTuple(ErlangParser.TupleContext ctx) {
         if (ctx.children.get(1).toString().equals("ok")){
             ruby_code += ctx.children.get(3).toString().toLowerCase();
+        }
+        else{
+            ruby_code += ctx.getText();
         }
     }
 
@@ -199,27 +203,31 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     public void listenFuncDec(ErlangParser.FuncDecContext ctx) {
-        ruby_code += "def ";
-        ruby_code += ctx.func(0).funcName().Name().getText()+"(";
-        for (ErlangParser.ArgContext arg: ctx.func(0).funcName().arg()) {
-            ruby_code += arg.getText().toLowerCase();
-            if (arg != ctx.func(0).funcName().arg().get(ctx.func(0).funcName().arg().size()-1)){
-                ruby_code += ", ";
+        for(int i=0;i<ctx.func().size();i++) {
+            ruby_code += "def ";
+            ruby_code += ctx.func(i).funcName().Name().getText() + "(";
+            for (ErlangParser.ArgContext arg : ctx.func(i).funcName().arg()) {
+                ruby_code += arg.getText().toLowerCase();
+                if (arg != ctx.func(i).funcName().arg().get(ctx.func(i).funcName().arg().size() - 1)) {
+                    ruby_code += ", ";
+                }
             }
+            ruby_code += ")";
+            ruby_code += "\n";
+            listenBody(ctx.func(i).body());
+            ruby_code += "end";
+            ruby_code += "\n";
+            ruby_code += "\n";
         }
-        ruby_code += ")";
-        ruby_code += "\n";
-        for (ErlangParser.FuncContext func: ctx.func()) {
-            listenBody(func.body());
-        }
-        ruby_code += "end";
-        ruby_code += "\n";
-        ruby_code += "\n";
     }
 
     public void listenMain(ErlangParser.MainContext ctx){
         for (ErlangParser.LineContext line: ctx.body().line()) {
-            listenLine(line);
+            if (line.funcName() != null) {
+                listenFuncName(line.funcName());
+            } else {
+                listenLine(line);
+            }
             ruby_code += "\n";
         }
         ruby_code += "\n";

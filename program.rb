@@ -1,13 +1,10 @@
-def if_test(A)
-  if A==1
-    puts("1")
-  elsif A>1
-    puts("winksze")
-  else
-    puts("mniejsze")
-  end
+def func(a)
+  return sdakh()
 end
 
-A = 1
-puts(if_test(A))
+def func(a, b)
+  return 2
+end
+
+func(1)
 
