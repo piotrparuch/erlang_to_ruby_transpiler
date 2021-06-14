@@ -40,20 +40,20 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
 
     public void listenDeclaration(ErlangParser.DeclarationContext ctx) {
         if (ctx.Var() != null){
-            ruby_code += ctx.Var().getText().toLowerCase();
-            ruby_code += " = ";
+            String expr = ctx.Var().getText().toLowerCase() + " = ";
             if (ctx.read() != null){
-                listenRead(ctx.read());
+                listenRead(ctx.read(), expr);
             }
             if (ctx.type() != null){
+                ruby_code += expr;
                 listenType(ctx.type());
             }
         }
         if (ctx.tuple() != null){
-            listenTuple(ctx.tuple());
-            ruby_code += " = ";
+            String varName = nameReturn(ctx.tuple());
+            String expr = varName + " = ";
             if (ctx.read() != null){
-                listenRead(ctx.read());
+                listenRead(ctx.read(), expr);
             }
             if (ctx.type() != null){
                 listenType(ctx.type());
@@ -81,6 +81,13 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         }
     }
 
+    private String nameReturn(ErlangParser.TupleContext ctx) {
+        if (ctx.children.get(1).toString().equals("ok")){
+            return ctx.children.get(3).toString().toLowerCase();
+        }
+        return "_";
+    }
+
     public void listenExpr(ErlangParser.ExprContext ctx) {
         if (ctx.operation() != null){
             listenOperation(ctx.operation());
@@ -99,10 +106,13 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
 
     public void listenFunc(ErlangParser.FuncContext ctx) { }
 
-    public void listenRead(ErlangParser.ReadContext ctx){
-        ruby_code += "gets.chomp(";
+    public void listenRead(ErlangParser.ReadContext ctx, String expr){
+        ruby_code += "puts(";
         ruby_code += ctx.String().getText();
-        ruby_code += ")";
+        ruby_code += ")\n";
+        add_tabs();
+        ruby_code += expr;
+        ruby_code += "gets.chomp";
     }
 
     public void listenPrint(ErlangParser.PrintContext ctx){
@@ -133,13 +143,13 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     public void listenOperation(ErlangParser.OperationContext ctx){
-        if (ctx.Op().getText().toString().equals("=<")){
-            String tmp = ctx.getText().toString().toLowerCase();
+        if (ctx.Op().getText().equals("=<")){
+            String tmp = ctx.getText().toLowerCase();
             tmp = tmp.replace("=<", "<=");
             ruby_code += tmp;
         }
         else{
-            ruby_code += ctx.getText().toString().toLowerCase();
+            ruby_code += ctx.getText().toLowerCase();
         }
     }
 
