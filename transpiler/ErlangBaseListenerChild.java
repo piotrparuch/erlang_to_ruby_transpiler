@@ -3,8 +3,6 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
-import java.util.Locale;
-
 public class ErlangBaseListenerChild extends ErlangBaseListener{
 
     String ruby_code = "";
@@ -119,8 +117,13 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
             ruby_code += varName;
             ruby_code += "}\"";
         }
-        else
+        else {
+            if (text.contains("(")) {
+                String textSubstr = text.substring(text.indexOf("(") + 1, text.indexOf(")"));
+                text = text.replace(textSubstr, textSubstr.toLowerCase());
+            }
             ruby_code += text;
+        }
 
         ruby_code += ")";
     }
@@ -156,7 +159,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         ruby_code += ctx.Name().getText();
         ruby_code += '(';
         for (ErlangParser.ArgContext arg: ctx.arg()) {
-            ruby_code += arg.getText();
+            ruby_code += arg.getText().toLowerCase();
             if (arg != ctx.arg().get(ctx.arg().size()-1)){
                 ruby_code += ", ";
             }

@@ -3,3 +3,6 @@
 
 print_test() ->
   io:format("This is a print without var interpolation test.").
+
+main() ->
+  print_test().
