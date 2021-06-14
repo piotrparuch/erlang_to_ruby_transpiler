@@ -62,6 +62,10 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         if (ctx.list() != null){
             listenList(ctx.list());
         }
+
+        if (ctx.map() != null){
+            listenMap(ctx.map());
+        }
     }
 
     private void listenType(ErlangParser.TypeContext ctx) {
@@ -70,6 +74,19 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
 
     private void listenList(ErlangParser.ListContext ctx) {
         ruby_code += ctx.getText();
+    }
+
+    private void listenMap(ErlangParser.MapContext ctx) {
+        String text = ctx.getText();
+        int eqIdx = text.indexOf("=");
+        String newHashName = text.substring(0, eqIdx - 1);
+        String dec = ctx.getText().substring(0, eqIdx + 1);
+        int hashFinIdx = text.indexOf("}");
+        String hashContent = text.substring(eqIdx + 4, hashFinIdx);
+        ruby_code += newHashName;
+        ruby_code += " = Hash[";
+        ruby_code += hashContent;
+        ruby_code += "]";
     }
 
     private void listenTuple(ErlangParser.TupleContext ctx) {
