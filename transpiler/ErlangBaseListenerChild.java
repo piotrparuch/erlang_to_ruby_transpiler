@@ -69,7 +69,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
 
     private void listenTuple(ErlangParser.TupleContext ctx) {
         if (ctx.children.get(1).toString().equals("ok")){
-            ruby_code += ctx.children.get(3);
+            ruby_code += ctx.children.get(3).toString().toLowerCase();
         }
     }
 
@@ -99,14 +99,19 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
 
     public void listenPrint(ErlangParser.PrintContext ctx){
         ruby_code += "puts(";
+        String textFull = ctx.getText();
         String text = ctx.String().getText();
-        int varIndex = ctx.String().getText().indexOf("~w");
-        int separatorIndex = text.indexOf(",");
-        //String varName = text.substring(separatorIndex + 3);
-        //ruby_code += text.substring(0, varIndex);
+
+        int varIndex = text.indexOf("~w");
+        int separatorIndex = textFull.indexOf(",");
+        int closeBrackIndex = textFull.indexOf("]");
+        String varName = textFull.substring(separatorIndex + 2, closeBrackIndex);
+        varName = varName.toLowerCase();
+        ruby_code += text.substring(0, varIndex);
         ruby_code += "#{";
-        //ruby_code += varName;
-        ruby_code += "}";
+        ruby_code += varName;
+        ruby_code += "}\"";
+
         //ruby_code += text.substring(varIndex + 2, separatorIndex);
         ruby_code += ")";
     }
