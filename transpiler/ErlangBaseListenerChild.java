@@ -3,6 +3,8 @@ import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.util.Locale;
+
 public class ErlangBaseListenerChild extends ErlangBaseListener{
 
     String ruby_code = "";
@@ -105,17 +107,20 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         String textFull = ctx.getText();
         String text = ctx.String().getText();
 
-        int varIndex = text.indexOf("~w");
-        int separatorIndex = textFull.indexOf(",");
-        int closeBrackIndex = textFull.indexOf("]");
-        String varName = textFull.substring(separatorIndex + 2, closeBrackIndex);
-        varName = varName.toLowerCase();
-        ruby_code += text.substring(0, varIndex);
-        ruby_code += "#{";
-        ruby_code += varName;
-        ruby_code += "}\"";
+        if (textFull.contains("~w")) {
+            int varIndex = text.indexOf("~w");
+            int separatorIndex = textFull.indexOf(",");
+            int closeBrackIndex = textFull.indexOf("]");
+            String varName = textFull.substring(separatorIndex + 2, closeBrackIndex);
+            varName = varName.toLowerCase();
+            ruby_code += text.substring(0, varIndex);
+            ruby_code += "#{";
+            ruby_code += varName;
+            ruby_code += "}\"";
+        }
+        else
+            ruby_code += text;
 
-        //ruby_code += text.substring(varIndex + 2, separatorIndex);
         ruby_code += ")";
     }
 
