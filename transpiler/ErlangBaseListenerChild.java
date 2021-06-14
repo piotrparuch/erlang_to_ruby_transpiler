@@ -54,6 +54,9 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
             if (ctx.read() != null){
                 listenRead(ctx.read());
             }
+            if (ctx.type() != null){
+                listenType(ctx.type());
+            }
         }
         if (ctx.list() != null){
             listenList(ctx.list());
