@@ -238,6 +238,18 @@ public class ErlangBaseListener implements ErlangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFuncDec(ErlangParser.FuncDecContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMain(ErlangParser.MainContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMain(ErlangParser.MainContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

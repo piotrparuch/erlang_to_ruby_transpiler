@@ -1,12 +1,13 @@
-def elo()
-  Elo = 1
+def if_test(A)
+  if A==1
+    puts("1")
+  elsif A>1
+    puts("winksze")
+  else
+    puts("mniejsze")
+  end
 end
 
-def elson(Gitara, Siema, 1)
-  return 1
-end
-
-def eluwina()
-  return 1
-end
+A = 1
+puts(if_test(A))
 

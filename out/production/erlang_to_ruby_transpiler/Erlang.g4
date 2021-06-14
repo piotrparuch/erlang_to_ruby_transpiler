@@ -39,7 +39,7 @@ fragment LOWER : [a-z] ;
 WS : [ \t\r\n]+ -> skip ;
 Comment : '%' ~ [\r\n]*;
 
-program: module? compile? funcDec* EOF;
+program: module? compile? funcDec* main EOF;
 
 type : Integer | Char | String | Float ;
 
@@ -49,7 +49,7 @@ compile : '-compile' Left_bracket 'export_all' Right_bracket Dot ;
 
 read : Input '(' String ')' ;
 
-print : Output '(' String (',' (type | Var | list))* ')' ;
+print : Output '(' (type | funcName) (',' (type | Var | list))* ')' ;
 
 operation : (type | Var) Op (type | Var) ;
 
@@ -67,7 +67,7 @@ funcName : Name '(' (arg ','?)* ')' ;
 
 guard : 'when' expr ;
 
-line : (expr | if_stat) ;
+line : (expr | if_stat | funcName) ;
 
 body : (line ','?)* ;
 
@@ -76,4 +76,6 @@ if_stat: 'if' (operation '->' expr ';')+ ('true' '->' expr)? 'end';
 func : funcName guard? '->' body ;
 
 funcDec : func (';' func)* Dot ;
+
+main : 'main() ->' body Dot;
 
