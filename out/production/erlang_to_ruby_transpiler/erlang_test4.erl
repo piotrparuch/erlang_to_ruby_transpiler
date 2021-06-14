@@ -7,3 +7,7 @@ if_test(A) ->
     A > 1 -> io:format("winksze");
     true -> io:format("mniejsze")
   end.
+
+main() ->
+  A = 1,
+  io:format(if_test(A)).

@@ -196,4 +196,14 @@ public interface ErlangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFuncDec(ErlangParser.FuncDecContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#main}.
+	 * @param ctx the parse tree
+	 */
+	void enterMain(ErlangParser.MainContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#main}.
+	 * @param ctx the parse tree
+	 */
+	void exitMain(ErlangParser.MainContext ctx);
 }

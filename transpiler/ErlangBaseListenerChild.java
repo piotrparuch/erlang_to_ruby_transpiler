@@ -25,6 +25,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         for (ErlangParser.FuncDecContext context: ctx.funcDec()) {
             listenFuncDec(context);
         }
+        listenMain(ctx.main());
     }
 
 
@@ -55,6 +56,9 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
             ruby_code += " = ";
             if (ctx.read() != null){
                 listenRead(ctx.read());
+            }
+            if (ctx.type() != null){
+                listenType(ctx.type());
             }
         }
         if (ctx.list() != null){
@@ -102,7 +106,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     public void listenPrint(ErlangParser.PrintContext ctx){
         ruby_code += "puts(";
         String textFull = ctx.getText();
-        String text = ctx.String().getText();
+        String text = ctx.children.get(2).getText();
 
         if (textFull.contains("~w")) {
             int varIndex = text.indexOf("~w");
@@ -142,6 +146,22 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         if (ctx.if_stat() != null){
             listenIf_stat(ctx.if_stat());
         }
+        if (ctx.funcName() != null){
+            ruby_code += "return ";
+            listenFuncName(ctx.funcName());
+        }
+    }
+
+    private void listenFuncName(ErlangParser.FuncNameContext ctx) {
+        ruby_code += ctx.Name().getText();
+        ruby_code += '(';
+        for (ErlangParser.ArgContext arg: ctx.arg()) {
+            ruby_code += arg.getText();
+            if (arg != ctx.arg().get(ctx.arg().size()-1)){
+                ruby_code += ", ";
+            }
+        }
+        ruby_code += ')';
     }
 
     private void listenIf_stat(ErlangParser.If_statContext ctx) {
@@ -171,7 +191,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         ruby_code += "\n";
         tabs += 1;
         add_tabs();
-        listenExpr(ctx.expr(1));
+        listenExpr(ctx.expr(ctx.expr().size()-1));
         ruby_code += "\n";
         tabs -= 1;
         add_tabs();
@@ -194,6 +214,14 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         }
         ruby_code += "end";
         ruby_code += "\n";
+        ruby_code += "\n";
+    }
+
+    public void listenMain(ErlangParser.MainContext ctx){
+        for (ErlangParser.LineContext line: ctx.body().line()) {
+            listenLine(line);
+            ruby_code += "\n";
+        }
         ruby_code += "\n";
     }
 
