@@ -1,5 +1,5 @@
 def func(a)
-  return other_func()
+  :exAtom
 end
 def func(a, b)
   return 2
@@ -9,4 +9,4 @@ def other_func()
   return 0
 end
 
-func(1)
+func(1, 2)

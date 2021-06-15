@@ -2,10 +2,10 @@
 -compile(export_all).
 
 func(A) ->
-  other_func();
+  exAtom;
 func(A, B) ->
   2.
 other_func() -> 0.
 
 main() ->
-  func(1).
+  func(1, 2).
