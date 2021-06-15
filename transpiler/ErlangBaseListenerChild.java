@@ -64,7 +64,11 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         }
 
         if (ctx.map() != null){
-            listenMap(ctx.map());
+            listenMap(ctx.getText());
+        }
+
+        if (ctx.map_to_list() != null) {
+            listenMapToList(ctx.getText());
         }
     }
 
@@ -76,13 +80,13 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         ruby_code += ctx.getText();
     }
 
-    private void listenMap(ErlangParser.MapContext ctx) {
-        String text = ctx.getText();
+    private void listenMap(String ctx) {
+        String text = ctx;
         int eqIdx = text.indexOf("=");
-        String newHashName = text.substring(0, eqIdx - 1);
-        String dec = ctx.getText().substring(0, eqIdx + 1);
+        String newHashName = text.substring(0, eqIdx).toLowerCase();
+        String dec = ctx.substring(0, eqIdx + 1);
         int hashFinIdx = text.indexOf("}");
-        String hashContent = text.substring(eqIdx + 4, hashFinIdx);
+        String hashContent = text.substring(eqIdx + 3, hashFinIdx);
         ruby_code += newHashName;
         ruby_code += " = Hash[";
         ruby_code += hashContent;
@@ -103,6 +107,16 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
             return ctx.children.get(3).toString().toLowerCase();
         }
         return "_";
+    }
+
+    private void listenMapToList(String ctx) {
+        int eqIdx = ctx.indexOf("=");
+        String newListName = ctx.substring(0, eqIdx).toLowerCase();
+        String mapName = ctx.substring(ctx.indexOf("(") + 1, ctx.indexOf(")")).toLowerCase();
+        ruby_code += newListName;
+        ruby_code += " = ";
+        ruby_code += mapName;
+        ruby_code += ".to_a";
     }
 
     public void listenExpr(ErlangParser.ExprContext ctx) {
@@ -137,8 +151,9 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
         String textFull = ctx.getText();
         String text = ctx.children.get(2).getText();
 
-        if (textFull.contains("~w")) {
+        if (textFull.contains("~w") || textFull.contains("~p")) {
             int varIndex = text.indexOf("~w");
+            if (varIndex == -1) varIndex = text.indexOf("~p");
             int separatorIndex = textFull.indexOf(",");
             int closeBrackIndex = textFull.indexOf("]");
             String varName = textFull.substring(separatorIndex + 2, closeBrackIndex);
@@ -198,15 +213,29 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     private void listenFuncName(ErlangParser.FuncNameContext ctx) {
-        ruby_code += ctx.Name().getText();
-        ruby_code += '(';
-        for (ErlangParser.ArgContext arg: ctx.arg()) {
-            ruby_code += arg.getText().toLowerCase();
-            if (arg != ctx.arg().get(ctx.arg().size()-1)){
-                ruby_code += ", ";
-            }
+        if (ctx.map_to_list() != null) {
+            listenMapToList(ctx.getText());
         }
-        ruby_code += ')';
+        else if (ctx.list_reverse() != null) {
+            listenListReverse(ctx.getText());
+        }
+        else {
+            ruby_code += ctx.Name().getText();
+            ruby_code += '(';
+            for (ErlangParser.ArgContext arg : ctx.arg()) {
+                ruby_code += arg.getText().toLowerCase();
+                if (arg != ctx.arg().get(ctx.arg().size() - 1)) {
+                    ruby_code += ", ";
+                }
+            }
+            ruby_code += ')';
+        }
+    }
+
+    private void listenListReverse(String ctx) {
+        String listName = ctx.substring(ctx.indexOf("(") + 1, ctx.indexOf(")")).toLowerCase();
+        ruby_code += listName;
+        ruby_code += ".reverse!";
     }
 
     private void listenIf_stat(ErlangParser.If_statContext ctx) {
