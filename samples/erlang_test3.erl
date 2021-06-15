@@ -2,7 +2,7 @@
 -compile(export_all).
 
 func(A) ->
-  sdakh();
+  other_func();
 func(A, B) ->
   2.
 

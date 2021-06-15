@@ -153,15 +153,21 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
 
         if (textFull.contains("~w") || textFull.contains("~p")) {
             int varIndex = text.indexOf("~w");
-            if (varIndex == -1) varIndex = text.indexOf("~p");
-            int separatorIndex = textFull.indexOf(",");
-            int closeBrackIndex = textFull.indexOf("]");
-            String varName = textFull.substring(separatorIndex + 2, closeBrackIndex);
-            varName = varName.toLowerCase();
-            ruby_code += text.substring(0, varIndex);
-            ruby_code += "#{";
-            ruby_code += varName;
-            ruby_code += "}\"";
+            if (ctx.list(0).funcName() != null) {
+                ErlangParser.FuncNameContext funcNameVar = ctx.list(0).funcName(0);
+                if (funcNameVar != null) listenFuncName(funcNameVar);
+            }
+            else {
+                if (varIndex == -1) varIndex = text.indexOf("~p");
+                int separatorIndex = textFull.indexOf(",");
+                int closeBrackIndex = textFull.indexOf("]");
+                String varName = textFull.substring(separatorIndex + 2, closeBrackIndex);
+                varName = varName.toLowerCase();
+                ruby_code += text.substring(0, varIndex);
+                ruby_code += "#{";
+                ruby_code += varName;
+                ruby_code += "}\"";
+            }
         }
         else {
             if (text.contains("(")) {
@@ -223,9 +229,15 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
             ruby_code += ctx.Name().getText();
             ruby_code += '(';
             for (ErlangParser.ArgContext arg : ctx.arg()) {
-                ruby_code += arg.getText().toLowerCase();
-                if (arg != ctx.arg().get(ctx.arg().size() - 1)) {
-                    ruby_code += ", ";
+                if (Character.isLowerCase(arg.getText().charAt(0))) {
+                    ruby_code += ":";
+                    ruby_code += arg.getText().toLowerCase();
+                }
+                else {
+                    ruby_code += arg.getText().toLowerCase();
+                    if (arg != ctx.arg().get(ctx.arg().size() - 1)) {
+                        ruby_code += ", ";
+                    }
                 }
             }
             ruby_code += ')';

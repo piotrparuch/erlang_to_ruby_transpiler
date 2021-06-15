@@ -1,12 +1,12 @@
 -module(erlang_test1).
 -compile(export_all).
 
-elo() ->
-  Elo = 1.
+hello() ->
+  Hello = 1.
 
-elson(Gitara, Siema, 1) -> 1.
+hi(First, varAtom) -> 2.
 
-eluwina() -> 1.
+hey() -> 3.
 
 main() ->
-  1.
+  io:format("~w", [hi("First argument", varAtom)]).

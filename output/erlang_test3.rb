@@ -1,5 +1,5 @@
 def func(a)
-  return sdakh()
+  return other_func()
   return 2
 end
 
