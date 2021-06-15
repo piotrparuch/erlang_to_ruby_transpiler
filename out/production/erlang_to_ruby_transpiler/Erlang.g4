@@ -65,7 +65,7 @@ expr : operation | declaration | print | type;
 
 arg : type | Var;
 
-funcName : Name '(' (arg ','?)* ')' | map_to_list ;
+funcName : Name '(' (arg ','?)* ')' | map_to_list | list_reverse;
 
 guard : 'when' expr (',' expr)* ;
 
@@ -83,4 +83,4 @@ main : 'main() ->' body Dot;
 
 map_to_list : 'maps:to_list(' (Var | map) ')' ;
 
-list_reverse : 'lists:reverse(' list ')' ;
+list_reverse : 'lists:reverse(' (Var | list) ')' ;

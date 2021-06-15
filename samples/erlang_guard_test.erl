@@ -11,5 +11,5 @@ age(AgeInput) when AgeInput >= 1, AgeInput < 3 ->
   toddler.
 
 main() ->
-  {ok, AgeInput} = io:read("Enter some age: "),
+  AgeInput = 10,
   io:format("Result: ~w~n", [age(AgeInput)]).

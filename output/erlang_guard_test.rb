@@ -11,7 +11,5 @@ def age(ageinput)
   end
 end
 
-puts("Enter some age: ")
-ageinput = gets.chomp
+ageinput = 10
 puts("Result: #{age(ageinput)}")
-
