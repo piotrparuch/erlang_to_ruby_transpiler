@@ -81,6 +81,6 @@ funcDec : func (';' func)* Dot ;
 
 main : 'main() ->' body Dot;
 
-map_to_list : 'maps:to_list(' Var | map ')' ;
+map_to_list : 'maps:to_list(' (Var | map) ')' ;
 
 list_reverse : 'lists:reverse(' list ')' ;

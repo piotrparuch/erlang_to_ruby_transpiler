@@ -97,6 +97,16 @@ public interface ErlangListener extends ParseTreeListener {
 	 */
 	void exitTuple(ErlangParser.TupleContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ErlangParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void enterMap(ErlangParser.MapContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#map}.
+	 * @param ctx the parse tree
+	 */
+	void exitMap(ErlangParser.MapContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ErlangParser#declaration}.
 	 * @param ctx the parse tree
 	 */
@@ -206,4 +216,24 @@ public interface ErlangListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitMain(ErlangParser.MainContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#map_to_list}.
+	 * @param ctx the parse tree
+	 */
+	void enterMap_to_list(ErlangParser.Map_to_listContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#map_to_list}.
+	 * @param ctx the parse tree
+	 */
+	void exitMap_to_list(ErlangParser.Map_to_listContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#list_reverse}.
+	 * @param ctx the parse tree
+	 */
+	void enterList_reverse(ErlangParser.List_reverseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#list_reverse}.
+	 * @param ctx the parse tree
+	 */
+	void exitList_reverse(ErlangParser.List_reverseContext ctx);
 }

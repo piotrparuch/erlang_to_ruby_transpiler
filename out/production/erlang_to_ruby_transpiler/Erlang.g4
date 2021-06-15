@@ -49,7 +49,7 @@ compile : '-compile' Left_bracket 'export_all' Right_bracket Dot ;
 
 read : Input '(' String ')' ;
 
-print : Output '(' (type | funcName) (',' (type | Var | list))* ')' ;
+print : Output '(' (type | funcName) (',' (type | Var | list | map))* ')' ;
 
 operation : (type | Var) Op (type | Var) ;
 
@@ -57,13 +57,15 @@ list : '[' ((type | Var | OK | funcName) ','?)* ']' ;
 
 tuple : '{' ((type | Var | OK) ','?)* '}' ;
 
-declaration : (Var | tuple | list) '=' (type | read);
+map : '#{' ((type | Var | Name) ' => ' (type | Var | Name | list | tuple | map) ','?)* '}' ;
+
+declaration : (Var | tuple | list) '=' (type | read | map | map_to_list | list_reverse) ;
 
 expr : operation | declaration | print | type;
 
 arg : type | Var;
 
-funcName : Name '(' (arg ','?)* ')' ;
+funcName : Name '(' (arg ','?)* ')' | map_to_list ;
 
 guard : 'when' expr (',' expr)* ;
 
@@ -79,3 +81,6 @@ funcDec : func (';' func)* Dot ;
 
 main : 'main() ->' body Dot;
 
+map_to_list : 'maps:to_list(' (Var | map) ')' ;
+
+list_reverse : 'lists:reverse(' list ')' ;

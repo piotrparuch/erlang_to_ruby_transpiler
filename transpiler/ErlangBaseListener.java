@@ -123,6 +123,18 @@ public class ErlangBaseListener implements ErlangListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterMap(ErlangParser.MapContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMap(ErlangParser.MapContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDeclaration(ErlangParser.DeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -250,6 +262,30 @@ public class ErlangBaseListener implements ErlangListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitMain(ErlangParser.MainContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMap_to_list(ErlangParser.Map_to_listContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMap_to_list(ErlangParser.Map_to_listContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterList_reverse(ErlangParser.List_reverseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitList_reverse(ErlangParser.List_reverseContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
