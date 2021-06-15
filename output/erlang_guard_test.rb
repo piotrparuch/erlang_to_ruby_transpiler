@@ -14,4 +14,3 @@ end
 puts("Enter some age: ")
 ageinput = gets.chomp
 puts("Result: #{age(ageinput)}")
-

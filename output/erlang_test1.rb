@@ -1,14 +1,13 @@
-def elo()
-  elo = 1
+def hello()
+  hello = 1
 end
 
-def elson(gitara, siema, 1)
-  return 1
+def hi(first, varatom)
+  return 2
 end
 
-def eluwina()
-  return 1
+def hey()
+  return 3
 end
 
-return 1
-
+puts(hi("first argument", :varatom))
