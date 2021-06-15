@@ -49,7 +49,7 @@ compile : '-compile' Left_bracket 'export_all' Right_bracket Dot ;
 
 read : Input '(' String ')' ;
 
-print : Output '(' (type | funcName) (',' (type | Var | list | map))* ')' ;
+print : Output '(' (type | funcName) (',' (type | Var | list | map | funcName))* ')' ;
 
 operation : (type | Var) Op (type | Var) ;
 
@@ -63,7 +63,7 @@ declaration : (Var | tuple | list) '=' (type | read | map | map_to_list | list_r
 
 expr : operation | declaration | print | type;
 
-arg : type | Var;
+arg : type | Var | Name;
 
 funcName : Name '(' (arg ','?)* ')' | map_to_list | list_reverse;
 
