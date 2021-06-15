@@ -8,8 +8,8 @@ import java.io.*;
 public class ErlangToRubyTranspiler {
 
     public static void main(String[] args) throws IOException {
-        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("program.rb"));
         String filename = args[0];
+        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter("output/"+ filename.substring(10,filename.length()-4) +".rb"));
         File input = new File(filename);
         InputStream inputStream = new FileInputStream(input);
         ErlangLexer tokenizer = new ErlangLexer(fromStream(inputStream));

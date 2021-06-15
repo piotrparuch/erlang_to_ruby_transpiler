@@ -1,16 +1,3 @@
-def age(ageinput)
-  case
-  when ageinput>19
-    :adult
-  when ageinput>=13; ageinput<=19
-    :teen
-  when ageinput>=3; ageinput<13
-    :child
-  when ageinput>=1; ageinput<3
-    :toddler
-  end
-end
+#{1 = Hash[one",2 => "two"]
 
-ageinput = gets.chomp("Enter some age: ")
-puts("Result: #{age(ageinput)}")
 

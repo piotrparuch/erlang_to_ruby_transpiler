@@ -290,9 +290,6 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
                     add_tabs();
                     if (ctx.func(i).guard().expr(0).operation() != null) {
                         ruby_code += "case";
-//                        if (ctx.func(i).guard().expr(0).operation().type(0) != null){
-//                            ruby_code += ctx.func(i).guard().expr(0).operation().type(0).getText();
-//                        }
                         ruby_code += "\n";
                         add_tabs();
                         ruby_code += "when ";
@@ -328,6 +325,7 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
                     add_tabs();
                     ruby_code += "end";
                     ruby_code += "\n";
+                    tabs -= 1;
                 }
             }
         }
@@ -345,7 +343,6 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
             }
             ruby_code += "\n";
         }
-        ruby_code += "\n";
     }
 
     public void listenEveryRule(ParserRuleContext ctx) { }

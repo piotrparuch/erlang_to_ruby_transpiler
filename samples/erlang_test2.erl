@@ -4,3 +4,6 @@
 square_area() ->
   {ok,Length} = io:read("Length of the square: "),
   io:format("Area of the square: ~w~n", [Length]).
+
+main() ->
+  square_area().
