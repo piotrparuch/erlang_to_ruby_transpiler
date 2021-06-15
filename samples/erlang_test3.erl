@@ -5,8 +5,7 @@ func(A) ->
   other_func();
 func(A, B) ->
   2.
-other_func() ->
-
+other_func() -> 0.
 
 main() ->
   func(1).

@@ -1,10 +1,10 @@
 def if_test(a)
   if a==1
-    puts("1")
+    return 1
   elsif a>1
-    puts("winksze")
+    return "wieksze"
   else
-    puts("mniejsze")
+    return "mniejsze"
   end
 end
 

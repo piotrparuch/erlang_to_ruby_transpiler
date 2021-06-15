@@ -287,6 +287,10 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     public void listenFuncDec(ErlangParser.FuncDecContext ctx) {
         for (int i = 0; i < ctx.func().size(); i++) {
             if (i == 0 || (!ctx.func(i).funcName().Name().getText().equals(ctx.func(i - 1).funcName().Name().getText())) || (ctx.func(i).funcName().arg().size() != ctx.func(i-1).funcName().arg().size())) {
+                if( i!=0 && ctx.func(i).funcName().arg().size() != ctx.func(i-1).funcName().arg().size()){
+                    ruby_code += "end";
+                    ruby_code += "\n";
+                }
                 ruby_code += "def ";
                 ruby_code += ctx.func(i).funcName().Name().getText() + "(";
                 for (ErlangParser.ArgContext arg : ctx.func(i).funcName().arg()) {

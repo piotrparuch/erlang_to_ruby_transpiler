@@ -3,9 +3,9 @@
 
 if_test(A) ->
   if
-    A == 1 -> io:format("1");
-    A > 1 -> io:format("winksze");
-    true -> io:format("mniejsze")
+    A == 1 -> 1;
+    A > 1 -> "wieksze";
+    true -> "mniejsze"
   end.
 
 main() ->
