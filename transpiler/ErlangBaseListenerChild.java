@@ -181,14 +181,9 @@ public class ErlangBaseListenerChild extends ErlangBaseListener{
     }
 
     public void listenOperation(ErlangParser.OperationContext ctx){
-        if (ctx.Op().getText().equals("=<")){
-            String tmp = ctx.getText().toLowerCase();
-            tmp = tmp.replace("=<", "<=");
-            ruby_code += tmp;
-        }
-        else{
-            ruby_code += ctx.getText().toLowerCase();
-        }
+        String tmp = ctx.getText().toLowerCase();
+        tmp = tmp.replace("=<", "<=");
+        ruby_code += tmp;
     }
 
     public void listenBody(ErlangParser.BodyContext ctx) {

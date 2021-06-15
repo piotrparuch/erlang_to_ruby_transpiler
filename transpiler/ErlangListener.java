@@ -67,6 +67,26 @@ public interface ErlangListener extends ParseTreeListener {
 	 */
 	void exitPrint(ErlangParser.PrintContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link ErlangParser#logop}.
+	 * @param ctx the parse tree
+	 */
+	void enterLogop(ErlangParser.LogopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#logop}.
+	 * @param ctx the parse tree
+	 */
+	void exitLogop(ErlangParser.LogopContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link ErlangParser#nlogop}.
+	 * @param ctx the parse tree
+	 */
+	void enterNlogop(ErlangParser.NlogopContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link ErlangParser#nlogop}.
+	 * @param ctx the parse tree
+	 */
+	void exitNlogop(ErlangParser.NlogopContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link ErlangParser#operation}.
 	 * @param ctx the parse tree
 	 */

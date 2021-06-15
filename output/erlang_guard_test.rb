@@ -12,4 +12,4 @@ def age(ageinput)
 end
 
 ageinput = 10
-puts("Result: #{age(ageinput)}")
+puts(age(ageinput))

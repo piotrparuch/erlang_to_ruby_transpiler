@@ -18,7 +18,9 @@ Name: (LOWER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
 
 Var : (UPPER | '_') (DGT | LOWER | UPPER | '_' | '@')* ;
 
-Op : '+' | '-' | '*' | '/' | '>' | '>=' | '<' | '=<' | '==' | '/=' ;
+Op : '+' | '-' | '*' | '/'  ;
+
+OpLog: '>' | '>=' | '<' | '=<' | '==' | '/=' ;
 
 Integer : '0' | ([1-9][0-9]*);
 
@@ -51,7 +53,11 @@ read : Input '(' String ')' ;
 
 print : Output '(' (type | funcName) (',' (type | Var | list | map | funcName))* ')' ;
 
-operation : (type | Var) Op (type | Var) ;
+logop : (type | Var) OpLog (type | Var) ;
+
+nlogop : (type | Var) Op (type | Var) ;
+
+operation : logop | nlogop ;
 
 list : '[' ((type | Var | OK | funcName) ','?)* ']' ;
 

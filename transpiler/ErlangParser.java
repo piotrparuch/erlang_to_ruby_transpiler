@@ -19,19 +19,20 @@ public class ErlangParser extends Parser {
 		T__0=1, T__1=2, T__2=3, T__3=4, T__4=5, T__5=6, T__6=7, T__7=8, T__8=9, 
 		T__9=10, T__10=11, T__11=12, T__12=13, T__13=14, T__14=15, T__15=16, T__16=17, 
 		T__17=18, T__18=19, T__19=20, Dot=21, Left_bracket=22, Right_bracket=23, 
-		OK=24, Input=25, Output=26, Endl=27, Name=28, Var=29, Op=30, Integer=31, 
-		Float=32, String=33, Char=34, WS=35, Comment=36;
+		OK=24, Input=25, Output=26, Endl=27, Name=28, Var=29, Op=30, OpLog=31, 
+		Integer=32, Float=33, String=34, Char=35, WS=36, Comment=37;
 	public static final int
 		RULE_program = 0, RULE_type = 1, RULE_module = 2, RULE_compile = 3, RULE_read = 4, 
-		RULE_print = 5, RULE_operation = 6, RULE_list = 7, RULE_tuple = 8, RULE_map = 9, 
-		RULE_declaration = 10, RULE_expr = 11, RULE_arg = 12, RULE_funcName = 13, 
-		RULE_guard = 14, RULE_line = 15, RULE_body = 16, RULE_if_stat = 17, RULE_func = 18, 
-		RULE_funcDec = 19, RULE_main = 20, RULE_map_to_list = 21, RULE_list_reverse = 22;
+		RULE_print = 5, RULE_logop = 6, RULE_nlogop = 7, RULE_operation = 8, RULE_list = 9, 
+		RULE_tuple = 10, RULE_map = 11, RULE_declaration = 12, RULE_expr = 13, 
+		RULE_arg = 14, RULE_funcName = 15, RULE_guard = 16, RULE_line = 17, RULE_body = 18, 
+		RULE_if_stat = 19, RULE_func = 20, RULE_funcDec = 21, RULE_main = 22, 
+		RULE_map_to_list = 23, RULE_list_reverse = 24;
 	private static String[] makeRuleNames() {
 		return new String[] {
-			"program", "type", "module", "compile", "read", "print", "operation", 
-			"list", "tuple", "map", "declaration", "expr", "arg", "funcName", "guard", 
-			"line", "body", "if_stat", "func", "funcDec", "main", "map_to_list", 
+			"program", "type", "module", "compile", "read", "print", "logop", "nlogop", 
+			"operation", "list", "tuple", "map", "declaration", "expr", "arg", "funcName", 
+			"guard", "line", "body", "if_stat", "func", "funcDec", "main", "map_to_list", 
 			"list_reverse"
 		};
 	}
@@ -51,7 +52,7 @@ public class ErlangParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, "Dot", "Left_bracket", 
 			"Right_bracket", "OK", "Input", "Output", "Endl", "Name", "Var", "Op", 
-			"Integer", "Float", "String", "Char", "WS", "Comment"
+			"OpLog", "Integer", "Float", "String", "Char", "WS", "Comment"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -143,43 +144,43 @@ public class ErlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(47);
+			setState(51);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__0) {
 				{
-				setState(46);
+				setState(50);
 				module();
 				}
 			}
 
-			setState(50);
+			setState(54);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__1) {
 				{
-				setState(49);
+				setState(53);
 				compile();
 				}
 			}
 
-			setState(55);
+			setState(59);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__18) | (1L << T__19) | (1L << Name))) != 0)) {
 				{
 				{
-				setState(52);
+				setState(56);
 				funcDec();
 				}
 				}
-				setState(57);
+				setState(61);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(58);
+			setState(62);
 			main();
-			setState(59);
+			setState(63);
 			match(EOF);
 			}
 		}
@@ -220,7 +221,7 @@ public class ErlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(61);
+			setState(65);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Integer) | (1L << Float) | (1L << String) | (1L << Char))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -268,15 +269,15 @@ public class ErlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(63);
-			match(T__0);
-			setState(64);
-			match(Left_bracket);
-			setState(65);
-			match(Name);
-			setState(66);
-			match(Right_bracket);
 			setState(67);
+			match(T__0);
+			setState(68);
+			match(Left_bracket);
+			setState(69);
+			match(Name);
+			setState(70);
+			match(Right_bracket);
+			setState(71);
 			match(Dot);
 			}
 		}
@@ -315,15 +316,15 @@ public class ErlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(69);
-			match(T__1);
-			setState(70);
-			match(Left_bracket);
-			setState(71);
-			match(T__2);
-			setState(72);
-			match(Right_bracket);
 			setState(73);
+			match(T__1);
+			setState(74);
+			match(Left_bracket);
+			setState(75);
+			match(T__2);
+			setState(76);
+			match(Right_bracket);
+			setState(77);
 			match(Dot);
 			}
 		}
@@ -363,13 +364,13 @@ public class ErlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(75);
+			setState(79);
 			match(Input);
-			setState(76);
+			setState(80);
 			match(Left_bracket);
-			setState(77);
+			setState(81);
 			match(String);
-			setState(78);
+			setState(82);
 			match(Right_bracket);
 			}
 		}
@@ -437,11 +438,11 @@ public class ErlangParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(80);
-			match(Output);
-			setState(81);
-			match(Left_bracket);
 			setState(84);
+			match(Output);
+			setState(85);
+			match(Left_bracket);
+			setState(88);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case Integer:
@@ -449,7 +450,7 @@ public class ErlangParser extends Parser {
 			case String:
 			case Char:
 				{
-				setState(82);
+				setState(86);
 				type();
 				}
 				break;
@@ -457,22 +458,22 @@ public class ErlangParser extends Parser {
 			case T__19:
 			case Name:
 				{
-				setState(83);
+				setState(87);
 				funcName();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(96);
+			setState(100);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T__3) {
 				{
 				{
-				setState(86);
+				setState(90);
 				match(T__3);
-				setState(92);
+				setState(96);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case Integer:
@@ -480,25 +481,25 @@ public class ErlangParser extends Parser {
 				case String:
 				case Char:
 					{
-					setState(87);
+					setState(91);
 					type();
 					}
 					break;
 				case Var:
 					{
-					setState(88);
+					setState(92);
 					match(Var);
 					}
 					break;
 				case T__4:
 					{
-					setState(89);
+					setState(93);
 					list();
 					}
 					break;
 				case T__8:
 					{
-					setState(90);
+					setState(94);
 					map();
 					}
 					break;
@@ -506,7 +507,7 @@ public class ErlangParser extends Parser {
 				case T__19:
 				case Name:
 					{
-					setState(91);
+					setState(95);
 					funcName();
 					}
 					break;
@@ -515,11 +516,11 @@ public class ErlangParser extends Parser {
 				}
 				}
 				}
-				setState(98);
+				setState(102);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(99);
+			setState(103);
 			match(Right_bracket);
 			}
 		}
@@ -534,7 +535,96 @@ public class ErlangParser extends Parser {
 		return _localctx;
 	}
 
-	public static class OperationContext extends ParserRuleContext {
+	public static class LogopContext extends ParserRuleContext {
+		public TerminalNode OpLog() { return getToken(ErlangParser.OpLog, 0); }
+		public List<TypeContext> type() {
+			return getRuleContexts(TypeContext.class);
+		}
+		public TypeContext type(int i) {
+			return getRuleContext(TypeContext.class,i);
+		}
+		public List<TerminalNode> Var() { return getTokens(ErlangParser.Var); }
+		public TerminalNode Var(int i) {
+			return getToken(ErlangParser.Var, i);
+		}
+		public LogopContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_logop; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ErlangListener ) ((ErlangListener)listener).enterLogop(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ErlangListener ) ((ErlangListener)listener).exitLogop(this);
+		}
+	}
+
+	public final LogopContext logop() throws RecognitionException {
+		LogopContext _localctx = new LogopContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_logop);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(107);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case Integer:
+			case Float:
+			case String:
+			case Char:
+				{
+				setState(105);
+				type();
+				}
+				break;
+			case Var:
+				{
+				setState(106);
+				match(Var);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			setState(109);
+			match(OpLog);
+			setState(112);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case Integer:
+			case Float:
+			case String:
+			case Char:
+				{
+				setState(110);
+				type();
+				}
+				break;
+			case Var:
+				{
+				setState(111);
+				match(Var);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class NlogopContext extends ParserRuleContext {
 		public TerminalNode Op() { return getToken(ErlangParser.Op, 0); }
 		public List<TypeContext> type() {
 			return getRuleContexts(TypeContext.class);
@@ -545,6 +635,90 @@ public class ErlangParser extends Parser {
 		public List<TerminalNode> Var() { return getTokens(ErlangParser.Var); }
 		public TerminalNode Var(int i) {
 			return getToken(ErlangParser.Var, i);
+		}
+		public NlogopContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_nlogop; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof ErlangListener ) ((ErlangListener)listener).enterNlogop(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof ErlangListener ) ((ErlangListener)listener).exitNlogop(this);
+		}
+	}
+
+	public final NlogopContext nlogop() throws RecognitionException {
+		NlogopContext _localctx = new NlogopContext(_ctx, getState());
+		enterRule(_localctx, 14, RULE_nlogop);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(116);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case Integer:
+			case Float:
+			case String:
+			case Char:
+				{
+				setState(114);
+				type();
+				}
+				break;
+			case Var:
+				{
+				setState(115);
+				match(Var);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			setState(118);
+			match(Op);
+			setState(121);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case Integer:
+			case Float:
+			case String:
+			case Char:
+				{
+				setState(119);
+				type();
+				}
+				break;
+			case Var:
+				{
+				setState(120);
+				match(Var);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class OperationContext extends ParserRuleContext {
+		public LogopContext logop() {
+			return getRuleContext(LogopContext.class,0);
+		}
+		public NlogopContext nlogop() {
+			return getRuleContext(NlogopContext.class,0);
 		}
 		public OperationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -562,54 +736,25 @@ public class ErlangParser extends Parser {
 
 	public final OperationContext operation() throws RecognitionException {
 		OperationContext _localctx = new OperationContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_operation);
+		enterRule(_localctx, 16, RULE_operation);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(103);
+			setState(125);
 			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case Integer:
-			case Float:
-			case String:
-			case Char:
+			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
+			case 1:
+				enterOuterAlt(_localctx, 1);
 				{
-				setState(101);
-				type();
+				setState(123);
+				logop();
 				}
 				break;
-			case Var:
+			case 2:
+				enterOuterAlt(_localctx, 2);
 				{
-				setState(102);
-				match(Var);
+				setState(124);
+				nlogop();
 				}
 				break;
-			default:
-				throw new NoViableAltException(this);
-			}
-			setState(105);
-			match(Op);
-			setState(108);
-			_errHandler.sync(this);
-			switch (_input.LA(1)) {
-			case Integer:
-			case Float:
-			case String:
-			case Char:
-				{
-				setState(106);
-				type();
-				}
-				break;
-			case Var:
-				{
-				setState(107);
-				match(Var);
-				}
-				break;
-			default:
-				throw new NoViableAltException(this);
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -660,20 +805,20 @@ public class ErlangParser extends Parser {
 
 	public final ListContext list() throws RecognitionException {
 		ListContext _localctx = new ListContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_list);
+		enterRule(_localctx, 18, RULE_list);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(110);
+			setState(127);
 			match(T__4);
-			setState(122);
+			setState(139);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__18) | (1L << T__19) | (1L << OK) | (1L << Name) | (1L << Var) | (1L << Integer) | (1L << Float) | (1L << String) | (1L << Char))) != 0)) {
 				{
 				{
-				setState(115);
+				setState(132);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case Integer:
@@ -681,19 +826,19 @@ public class ErlangParser extends Parser {
 				case String:
 				case Char:
 					{
-					setState(111);
+					setState(128);
 					type();
 					}
 					break;
 				case Var:
 					{
-					setState(112);
+					setState(129);
 					match(Var);
 					}
 					break;
 				case OK:
 					{
-					setState(113);
+					setState(130);
 					match(OK);
 					}
 					break;
@@ -701,30 +846,30 @@ public class ErlangParser extends Parser {
 				case T__19:
 				case Name:
 					{
-					setState(114);
+					setState(131);
 					funcName();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(118);
+				setState(135);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T__3) {
 					{
-					setState(117);
+					setState(134);
 					match(T__3);
 					}
 				}
 
 				}
 				}
-				setState(124);
+				setState(141);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(125);
+			setState(142);
 			match(T__5);
 			}
 		}
@@ -770,20 +915,20 @@ public class ErlangParser extends Parser {
 
 	public final TupleContext tuple() throws RecognitionException {
 		TupleContext _localctx = new TupleContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_tuple);
+		enterRule(_localctx, 20, RULE_tuple);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(127);
+			setState(144);
 			match(T__6);
-			setState(138);
+			setState(155);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << OK) | (1L << Var) | (1L << Integer) | (1L << Float) | (1L << String) | (1L << Char))) != 0)) {
 				{
 				{
-				setState(131);
+				setState(148);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case Integer:
@@ -791,42 +936,42 @@ public class ErlangParser extends Parser {
 				case String:
 				case Char:
 					{
-					setState(128);
+					setState(145);
 					type();
 					}
 					break;
 				case Var:
 					{
-					setState(129);
+					setState(146);
 					match(Var);
 					}
 					break;
 				case OK:
 					{
-					setState(130);
+					setState(147);
 					match(OK);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(134);
+				setState(151);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T__3) {
 					{
-					setState(133);
+					setState(150);
 					match(T__3);
 					}
 				}
 
 				}
 				}
-				setState(140);
+				setState(157);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(141);
+			setState(158);
 			match(T__7);
 			}
 		}
@@ -890,20 +1035,20 @@ public class ErlangParser extends Parser {
 
 	public final MapContext map() throws RecognitionException {
 		MapContext _localctx = new MapContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_map);
+		enterRule(_localctx, 22, RULE_map);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(143);
+			setState(160);
 			match(T__8);
-			setState(163);
+			setState(180);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Name) | (1L << Var) | (1L << Integer) | (1L << Float) | (1L << String) | (1L << Char))) != 0)) {
 				{
 				{
-				setState(147);
+				setState(164);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case Integer:
@@ -911,28 +1056,28 @@ public class ErlangParser extends Parser {
 				case String:
 				case Char:
 					{
-					setState(144);
+					setState(161);
 					type();
 					}
 					break;
 				case Var:
 					{
-					setState(145);
+					setState(162);
 					match(Var);
 					}
 					break;
 				case Name:
 					{
-					setState(146);
+					setState(163);
 					match(Name);
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(149);
+				setState(166);
 				match(T__9);
-				setState(156);
+				setState(173);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case Integer:
@@ -940,60 +1085,60 @@ public class ErlangParser extends Parser {
 				case String:
 				case Char:
 					{
-					setState(150);
+					setState(167);
 					type();
 					}
 					break;
 				case Var:
 					{
-					setState(151);
+					setState(168);
 					match(Var);
 					}
 					break;
 				case Name:
 					{
-					setState(152);
+					setState(169);
 					match(Name);
 					}
 					break;
 				case T__4:
 					{
-					setState(153);
+					setState(170);
 					list();
 					}
 					break;
 				case T__6:
 					{
-					setState(154);
+					setState(171);
 					tuple();
 					}
 					break;
 				case T__8:
 					{
-					setState(155);
+					setState(172);
 					map();
 					}
 					break;
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(159);
+				setState(176);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T__3) {
 					{
-					setState(158);
+					setState(175);
 					match(T__3);
 					}
 				}
 
 				}
 				}
-				setState(165);
+				setState(182);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(166);
+			setState(183);
 			match(T__7);
 			}
 		}
@@ -1047,37 +1192,37 @@ public class ErlangParser extends Parser {
 
 	public final DeclarationContext declaration() throws RecognitionException {
 		DeclarationContext _localctx = new DeclarationContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_declaration);
+		enterRule(_localctx, 24, RULE_declaration);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(171);
+			setState(188);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case Var:
 				{
-				setState(168);
+				setState(185);
 				match(Var);
 				}
 				break;
 			case T__6:
 				{
-				setState(169);
+				setState(186);
 				tuple();
 				}
 				break;
 			case T__4:
 				{
-				setState(170);
+				setState(187);
 				list();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(173);
+			setState(190);
 			match(T__10);
-			setState(179);
+			setState(196);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case Integer:
@@ -1085,31 +1230,31 @@ public class ErlangParser extends Parser {
 			case String:
 			case Char:
 				{
-				setState(174);
+				setState(191);
 				type();
 				}
 				break;
 			case Input:
 				{
-				setState(175);
+				setState(192);
 				read();
 				}
 				break;
 			case T__8:
 				{
-				setState(176);
+				setState(193);
 				map();
 				}
 				break;
 			case T__18:
 				{
-				setState(177);
+				setState(194);
 				map_to_list();
 				}
 				break;
 			case T__19:
 				{
-				setState(178);
+				setState(195);
 				list_reverse();
 				}
 				break;
@@ -1158,36 +1303,36 @@ public class ErlangParser extends Parser {
 
 	public final ExprContext expr() throws RecognitionException {
 		ExprContext _localctx = new ExprContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_expr);
+		enterRule(_localctx, 26, RULE_expr);
 		try {
-			setState(185);
+			setState(202);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,20,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(181);
+				setState(198);
 				operation();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(182);
+				setState(199);
 				declaration();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(183);
+				setState(200);
 				print();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(184);
+				setState(201);
 				type();
 				}
 				break;
@@ -1226,9 +1371,9 @@ public class ErlangParser extends Parser {
 
 	public final ArgContext arg() throws RecognitionException {
 		ArgContext _localctx = new ArgContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_arg);
+		enterRule(_localctx, 28, RULE_arg);
 		try {
-			setState(190);
+			setState(207);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case Integer:
@@ -1237,21 +1382,21 @@ public class ErlangParser extends Parser {
 			case Char:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(187);
+				setState(204);
 				type();
 				}
 				break;
 			case Var:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(188);
+				setState(205);
 				match(Var);
 				}
 				break;
 			case Name:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(189);
+				setState(206);
 				match(Name);
 				}
 				break;
@@ -1302,58 +1447,58 @@ public class ErlangParser extends Parser {
 
 	public final FuncNameContext funcName() throws RecognitionException {
 		FuncNameContext _localctx = new FuncNameContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_funcName);
+		enterRule(_localctx, 30, RULE_funcName);
 		int _la;
 		try {
-			setState(206);
+			setState(223);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case Name:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(192);
+				setState(209);
 				match(Name);
-				setState(193);
+				setState(210);
 				match(Left_bracket);
-				setState(200);
+				setState(217);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Name) | (1L << Var) | (1L << Integer) | (1L << Float) | (1L << String) | (1L << Char))) != 0)) {
 					{
 					{
-					setState(194);
+					setState(211);
 					arg();
-					setState(196);
+					setState(213);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==T__3) {
 						{
-						setState(195);
+						setState(212);
 						match(T__3);
 						}
 					}
 
 					}
 					}
-					setState(202);
+					setState(219);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(203);
+				setState(220);
 				match(Right_bracket);
 				}
 				break;
 			case T__18:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(204);
+				setState(221);
 				map_to_list();
 				}
 				break;
 			case T__19:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(205);
+				setState(222);
 				list_reverse();
 				}
 				break;
@@ -1395,28 +1540,28 @@ public class ErlangParser extends Parser {
 
 	public final GuardContext guard() throws RecognitionException {
 		GuardContext _localctx = new GuardContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_guard);
+		enterRule(_localctx, 32, RULE_guard);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(208);
+			setState(225);
 			match(T__11);
-			setState(209);
+			setState(226);
 			expr();
-			setState(214);
+			setState(231);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T__3) {
 				{
 				{
-				setState(210);
+				setState(227);
 				match(T__3);
-				setState(211);
+				setState(228);
 				expr();
 				}
 				}
-				setState(216);
+				setState(233);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1460,34 +1605,34 @@ public class ErlangParser extends Parser {
 
 	public final LineContext line() throws RecognitionException {
 		LineContext _localctx = new LineContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_line);
+		enterRule(_localctx, 34, RULE_line);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(221);
+			setState(238);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,26,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,29,_ctx) ) {
 			case 1:
 				{
-				setState(217);
+				setState(234);
 				expr();
 				}
 				break;
 			case 2:
 				{
-				setState(218);
+				setState(235);
 				if_stat();
 				}
 				break;
 			case 3:
 				{
-				setState(219);
+				setState(236);
 				match(Name);
 				}
 				break;
 			case 4:
 				{
-				setState(220);
+				setState(237);
 				funcName();
 				}
 				break;
@@ -1528,32 +1673,32 @@ public class ErlangParser extends Parser {
 
 	public final BodyContext body() throws RecognitionException {
 		BodyContext _localctx = new BodyContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_body);
+		enterRule(_localctx, 36, RULE_body);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(229);
+			setState(246);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__4) | (1L << T__6) | (1L << T__12) | (1L << T__18) | (1L << T__19) | (1L << Output) | (1L << Name) | (1L << Var) | (1L << Integer) | (1L << Float) | (1L << String) | (1L << Char))) != 0)) {
 				{
 				{
-				setState(223);
+				setState(240);
 				line();
-				setState(225);
+				setState(242);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==T__3) {
 					{
-					setState(224);
+					setState(241);
 					match(T__3);
 					}
 				}
 
 				}
 				}
-				setState(231);
+				setState(248);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1599,48 +1744,48 @@ public class ErlangParser extends Parser {
 
 	public final If_statContext if_stat() throws RecognitionException {
 		If_statContext _localctx = new If_statContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_if_stat);
+		enterRule(_localctx, 38, RULE_if_stat);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(232);
+			setState(249);
 			match(T__12);
-			setState(238); 
+			setState(255); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
 				{
-				setState(233);
+				setState(250);
 				operation();
-				setState(234);
+				setState(251);
 				match(T__13);
-				setState(235);
+				setState(252);
 				expr();
-				setState(236);
+				setState(253);
 				match(T__14);
 				}
 				}
-				setState(240); 
+				setState(257); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << Var) | (1L << Integer) | (1L << Float) | (1L << String) | (1L << Char))) != 0) );
-			setState(245);
+			setState(262);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__15) {
 				{
-				setState(242);
+				setState(259);
 				match(T__15);
-				setState(243);
+				setState(260);
 				match(T__13);
-				setState(244);
+				setState(261);
 				expr();
 				}
 			}
 
-			setState(247);
+			setState(264);
 			match(T__16);
 			}
 		}
@@ -1681,26 +1826,26 @@ public class ErlangParser extends Parser {
 
 	public final FuncContext func() throws RecognitionException {
 		FuncContext _localctx = new FuncContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_func);
+		enterRule(_localctx, 40, RULE_func);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(249);
+			setState(266);
 			funcName();
-			setState(251);
+			setState(268);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==T__11) {
 				{
-				setState(250);
+				setState(267);
 				guard();
 				}
 			}
 
-			setState(253);
+			setState(270);
 			match(T__13);
-			setState(254);
+			setState(271);
 			body();
 			}
 		}
@@ -1739,30 +1884,30 @@ public class ErlangParser extends Parser {
 
 	public final FuncDecContext funcDec() throws RecognitionException {
 		FuncDecContext _localctx = new FuncDecContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_funcDec);
+		enterRule(_localctx, 42, RULE_funcDec);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(256);
+			setState(273);
 			func();
-			setState(261);
+			setState(278);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==T__14) {
 				{
 				{
-				setState(257);
+				setState(274);
 				match(T__14);
-				setState(258);
+				setState(275);
 				func();
 				}
 				}
-				setState(263);
+				setState(280);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(264);
+			setState(281);
 			match(Dot);
 			}
 		}
@@ -1798,15 +1943,15 @@ public class ErlangParser extends Parser {
 
 	public final MainContext main() throws RecognitionException {
 		MainContext _localctx = new MainContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_main);
+		enterRule(_localctx, 44, RULE_main);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(266);
+			setState(283);
 			match(T__17);
-			setState(267);
+			setState(284);
 			body();
-			setState(268);
+			setState(285);
 			match(Dot);
 			}
 		}
@@ -1843,31 +1988,31 @@ public class ErlangParser extends Parser {
 
 	public final Map_to_listContext map_to_list() throws RecognitionException {
 		Map_to_listContext _localctx = new Map_to_listContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_map_to_list);
+		enterRule(_localctx, 46, RULE_map_to_list);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(270);
+			setState(287);
 			match(T__18);
-			setState(273);
+			setState(290);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case Var:
 				{
-				setState(271);
+				setState(288);
 				match(Var);
 				}
 				break;
 			case T__8:
 				{
-				setState(272);
+				setState(289);
 				map();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(275);
+			setState(292);
 			match(Right_bracket);
 			}
 		}
@@ -1904,31 +2049,31 @@ public class ErlangParser extends Parser {
 
 	public final List_reverseContext list_reverse() throws RecognitionException {
 		List_reverseContext _localctx = new List_reverseContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_list_reverse);
+		enterRule(_localctx, 48, RULE_list_reverse);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(277);
+			setState(294);
 			match(T__19);
-			setState(280);
+			setState(297);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case Var:
 				{
-				setState(278);
+				setState(295);
 				match(Var);
 				}
 				break;
 			case T__4:
 				{
-				setState(279);
+				setState(296);
 				list();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(282);
+			setState(299);
 			match(Right_bracket);
 			}
 		}
@@ -1944,108 +2089,116 @@ public class ErlangParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3&\u011f\4\2\t\2\4"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\'\u0130\4\2\t\2\4"+
 		"\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t"+
 		"\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
-		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\3\2\5\2\62"+
-		"\n\2\3\2\5\2\65\n\2\3\2\7\28\n\2\f\2\16\2;\13\2\3\2\3\2\3\2\3\3\3\3\3"+
-		"\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\7"+
-		"\3\7\3\7\3\7\5\7W\n\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7_\n\7\7\7a\n\7\f\7\16"+
-		"\7d\13\7\3\7\3\7\3\b\3\b\5\bj\n\b\3\b\3\b\3\b\5\bo\n\b\3\t\3\t\3\t\3\t"+
-		"\3\t\5\tv\n\t\3\t\5\ty\n\t\7\t{\n\t\f\t\16\t~\13\t\3\t\3\t\3\n\3\n\3\n"+
-		"\3\n\5\n\u0086\n\n\3\n\5\n\u0089\n\n\7\n\u008b\n\n\f\n\16\n\u008e\13\n"+
-		"\3\n\3\n\3\13\3\13\3\13\3\13\5\13\u0096\n\13\3\13\3\13\3\13\3\13\3\13"+
-		"\3\13\3\13\5\13\u009f\n\13\3\13\5\13\u00a2\n\13\7\13\u00a4\n\13\f\13\16"+
-		"\13\u00a7\13\13\3\13\3\13\3\f\3\f\3\f\5\f\u00ae\n\f\3\f\3\f\3\f\3\f\3"+
-		"\f\3\f\5\f\u00b6\n\f\3\r\3\r\3\r\3\r\5\r\u00bc\n\r\3\16\3\16\3\16\5\16"+
-		"\u00c1\n\16\3\17\3\17\3\17\3\17\5\17\u00c7\n\17\7\17\u00c9\n\17\f\17\16"+
-		"\17\u00cc\13\17\3\17\3\17\3\17\5\17\u00d1\n\17\3\20\3\20\3\20\3\20\7\20"+
-		"\u00d7\n\20\f\20\16\20\u00da\13\20\3\21\3\21\3\21\3\21\5\21\u00e0\n\21"+
-		"\3\22\3\22\5\22\u00e4\n\22\7\22\u00e6\n\22\f\22\16\22\u00e9\13\22\3\23"+
-		"\3\23\3\23\3\23\3\23\3\23\6\23\u00f1\n\23\r\23\16\23\u00f2\3\23\3\23\3"+
-		"\23\5\23\u00f8\n\23\3\23\3\23\3\24\3\24\5\24\u00fe\n\24\3\24\3\24\3\24"+
-		"\3\25\3\25\3\25\7\25\u0106\n\25\f\25\16\25\u0109\13\25\3\25\3\25\3\26"+
-		"\3\26\3\26\3\26\3\27\3\27\3\27\5\27\u0114\n\27\3\27\3\27\3\30\3\30\3\30"+
-		"\5\30\u011b\n\30\3\30\3\30\3\30\2\2\31\2\4\6\b\n\f\16\20\22\24\26\30\32"+
-		"\34\36 \"$&(*,.\2\3\3\2!$\2\u013f\2\61\3\2\2\2\4?\3\2\2\2\6A\3\2\2\2\b"+
-		"G\3\2\2\2\nM\3\2\2\2\fR\3\2\2\2\16i\3\2\2\2\20p\3\2\2\2\22\u0081\3\2\2"+
-		"\2\24\u0091\3\2\2\2\26\u00ad\3\2\2\2\30\u00bb\3\2\2\2\32\u00c0\3\2\2\2"+
-		"\34\u00d0\3\2\2\2\36\u00d2\3\2\2\2 \u00df\3\2\2\2\"\u00e7\3\2\2\2$\u00ea"+
-		"\3\2\2\2&\u00fb\3\2\2\2(\u0102\3\2\2\2*\u010c\3\2\2\2,\u0110\3\2\2\2."+
-		"\u0117\3\2\2\2\60\62\5\6\4\2\61\60\3\2\2\2\61\62\3\2\2\2\62\64\3\2\2\2"+
-		"\63\65\5\b\5\2\64\63\3\2\2\2\64\65\3\2\2\2\659\3\2\2\2\668\5(\25\2\67"+
-		"\66\3\2\2\28;\3\2\2\29\67\3\2\2\29:\3\2\2\2:<\3\2\2\2;9\3\2\2\2<=\5*\26"+
-		"\2=>\7\2\2\3>\3\3\2\2\2?@\t\2\2\2@\5\3\2\2\2AB\7\3\2\2BC\7\30\2\2CD\7"+
-		"\36\2\2DE\7\31\2\2EF\7\27\2\2F\7\3\2\2\2GH\7\4\2\2HI\7\30\2\2IJ\7\5\2"+
-		"\2JK\7\31\2\2KL\7\27\2\2L\t\3\2\2\2MN\7\33\2\2NO\7\30\2\2OP\7#\2\2PQ\7"+
-		"\31\2\2Q\13\3\2\2\2RS\7\34\2\2SV\7\30\2\2TW\5\4\3\2UW\5\34\17\2VT\3\2"+
-		"\2\2VU\3\2\2\2Wb\3\2\2\2X^\7\6\2\2Y_\5\4\3\2Z_\7\37\2\2[_\5\20\t\2\\_"+
-		"\5\24\13\2]_\5\34\17\2^Y\3\2\2\2^Z\3\2\2\2^[\3\2\2\2^\\\3\2\2\2^]\3\2"+
-		"\2\2_a\3\2\2\2`X\3\2\2\2ad\3\2\2\2b`\3\2\2\2bc\3\2\2\2ce\3\2\2\2db\3\2"+
-		"\2\2ef\7\31\2\2f\r\3\2\2\2gj\5\4\3\2hj\7\37\2\2ig\3\2\2\2ih\3\2\2\2jk"+
-		"\3\2\2\2kn\7 \2\2lo\5\4\3\2mo\7\37\2\2nl\3\2\2\2nm\3\2\2\2o\17\3\2\2\2"+
-		"p|\7\7\2\2qv\5\4\3\2rv\7\37\2\2sv\7\32\2\2tv\5\34\17\2uq\3\2\2\2ur\3\2"+
-		"\2\2us\3\2\2\2ut\3\2\2\2vx\3\2\2\2wy\7\6\2\2xw\3\2\2\2xy\3\2\2\2y{\3\2"+
-		"\2\2zu\3\2\2\2{~\3\2\2\2|z\3\2\2\2|}\3\2\2\2}\177\3\2\2\2~|\3\2\2\2\177"+
-		"\u0080\7\b\2\2\u0080\21\3\2\2\2\u0081\u008c\7\t\2\2\u0082\u0086\5\4\3"+
-		"\2\u0083\u0086\7\37\2\2\u0084\u0086\7\32\2\2\u0085\u0082\3\2\2\2\u0085"+
-		"\u0083\3\2\2\2\u0085\u0084\3\2\2\2\u0086\u0088\3\2\2\2\u0087\u0089\7\6"+
-		"\2\2\u0088\u0087\3\2\2\2\u0088\u0089\3\2\2\2\u0089\u008b\3\2\2\2\u008a"+
-		"\u0085\3\2\2\2\u008b\u008e\3\2\2\2\u008c\u008a\3\2\2\2\u008c\u008d\3\2"+
-		"\2\2\u008d\u008f\3\2\2\2\u008e\u008c\3\2\2\2\u008f\u0090\7\n\2\2\u0090"+
-		"\23\3\2\2\2\u0091\u00a5\7\13\2\2\u0092\u0096\5\4\3\2\u0093\u0096\7\37"+
-		"\2\2\u0094\u0096\7\36\2\2\u0095\u0092\3\2\2\2\u0095\u0093\3\2\2\2\u0095"+
-		"\u0094\3\2\2\2\u0096\u0097\3\2\2\2\u0097\u009e\7\f\2\2\u0098\u009f\5\4"+
-		"\3\2\u0099\u009f\7\37\2\2\u009a\u009f\7\36\2\2\u009b\u009f\5\20\t\2\u009c"+
-		"\u009f\5\22\n\2\u009d\u009f\5\24\13\2\u009e\u0098\3\2\2\2\u009e\u0099"+
-		"\3\2\2\2\u009e\u009a\3\2\2\2\u009e\u009b\3\2\2\2\u009e\u009c\3\2\2\2\u009e"+
-		"\u009d\3\2\2\2\u009f\u00a1\3\2\2\2\u00a0\u00a2\7\6\2\2\u00a1\u00a0\3\2"+
-		"\2\2\u00a1\u00a2\3\2\2\2\u00a2\u00a4\3\2\2\2\u00a3\u0095\3\2\2\2\u00a4"+
-		"\u00a7\3\2\2\2\u00a5\u00a3\3\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\u00a8\3\2"+
-		"\2\2\u00a7\u00a5\3\2\2\2\u00a8\u00a9\7\n\2\2\u00a9\25\3\2\2\2\u00aa\u00ae"+
-		"\7\37\2\2\u00ab\u00ae\5\22\n\2\u00ac\u00ae\5\20\t\2\u00ad\u00aa\3\2\2"+
-		"\2\u00ad\u00ab\3\2\2\2\u00ad\u00ac\3\2\2\2\u00ae\u00af\3\2\2\2\u00af\u00b5"+
-		"\7\r\2\2\u00b0\u00b6\5\4\3\2\u00b1\u00b6\5\n\6\2\u00b2\u00b6\5\24\13\2"+
-		"\u00b3\u00b6\5,\27\2\u00b4\u00b6\5.\30\2\u00b5\u00b0\3\2\2\2\u00b5\u00b1"+
-		"\3\2\2\2\u00b5\u00b2\3\2\2\2\u00b5\u00b3\3\2\2\2\u00b5\u00b4\3\2\2\2\u00b6"+
-		"\27\3\2\2\2\u00b7\u00bc\5\16\b\2\u00b8\u00bc\5\26\f\2\u00b9\u00bc\5\f"+
-		"\7\2\u00ba\u00bc\5\4\3\2\u00bb\u00b7\3\2\2\2\u00bb\u00b8\3\2\2\2\u00bb"+
-		"\u00b9\3\2\2\2\u00bb\u00ba\3\2\2\2\u00bc\31\3\2\2\2\u00bd\u00c1\5\4\3"+
-		"\2\u00be\u00c1\7\37\2\2\u00bf\u00c1\7\36\2\2\u00c0\u00bd\3\2\2\2\u00c0"+
-		"\u00be\3\2\2\2\u00c0\u00bf\3\2\2\2\u00c1\33\3\2\2\2\u00c2\u00c3\7\36\2"+
-		"\2\u00c3\u00ca\7\30\2\2\u00c4\u00c6\5\32\16\2\u00c5\u00c7\7\6\2\2\u00c6"+
-		"\u00c5\3\2\2\2\u00c6\u00c7\3\2\2\2\u00c7\u00c9\3\2\2\2\u00c8\u00c4\3\2"+
-		"\2\2\u00c9\u00cc\3\2\2\2\u00ca\u00c8\3\2\2\2\u00ca\u00cb\3\2\2\2\u00cb"+
-		"\u00cd\3\2\2\2\u00cc\u00ca\3\2\2\2\u00cd\u00d1\7\31\2\2\u00ce\u00d1\5"+
-		",\27\2\u00cf\u00d1\5.\30\2\u00d0\u00c2\3\2\2\2\u00d0\u00ce\3\2\2\2\u00d0"+
-		"\u00cf\3\2\2\2\u00d1\35\3\2\2\2\u00d2\u00d3\7\16\2\2\u00d3\u00d8\5\30"+
-		"\r\2\u00d4\u00d5\7\6\2\2\u00d5\u00d7\5\30\r\2\u00d6\u00d4\3\2\2\2\u00d7"+
-		"\u00da\3\2\2\2\u00d8\u00d6\3\2\2\2\u00d8\u00d9\3\2\2\2\u00d9\37\3\2\2"+
-		"\2\u00da\u00d8\3\2\2\2\u00db\u00e0\5\30\r\2\u00dc\u00e0\5$\23\2\u00dd"+
-		"\u00e0\7\36\2\2\u00de\u00e0\5\34\17\2\u00df\u00db\3\2\2\2\u00df\u00dc"+
-		"\3\2\2\2\u00df\u00dd\3\2\2\2\u00df\u00de\3\2\2\2\u00e0!\3\2\2\2\u00e1"+
-		"\u00e3\5 \21\2\u00e2\u00e4\7\6\2\2\u00e3\u00e2\3\2\2\2\u00e3\u00e4\3\2"+
-		"\2\2\u00e4\u00e6\3\2\2\2\u00e5\u00e1\3\2\2\2\u00e6\u00e9\3\2\2\2\u00e7"+
-		"\u00e5\3\2\2\2\u00e7\u00e8\3\2\2\2\u00e8#\3\2\2\2\u00e9\u00e7\3\2\2\2"+
-		"\u00ea\u00f0\7\17\2\2\u00eb\u00ec\5\16\b\2\u00ec\u00ed\7\20\2\2\u00ed"+
-		"\u00ee\5\30\r\2\u00ee\u00ef\7\21\2\2\u00ef\u00f1\3\2\2\2\u00f0\u00eb\3"+
-		"\2\2\2\u00f1\u00f2\3\2\2\2\u00f2\u00f0\3\2\2\2\u00f2\u00f3\3\2\2\2\u00f3"+
-		"\u00f7\3\2\2\2\u00f4\u00f5\7\22\2\2\u00f5\u00f6\7\20\2\2\u00f6\u00f8\5"+
-		"\30\r\2\u00f7\u00f4\3\2\2\2\u00f7\u00f8\3\2\2\2\u00f8\u00f9\3\2\2\2\u00f9"+
-		"\u00fa\7\23\2\2\u00fa%\3\2\2\2\u00fb\u00fd\5\34\17\2\u00fc\u00fe\5\36"+
-		"\20\2\u00fd\u00fc\3\2\2\2\u00fd\u00fe\3\2\2\2\u00fe\u00ff\3\2\2\2\u00ff"+
-		"\u0100\7\20\2\2\u0100\u0101\5\"\22\2\u0101\'\3\2\2\2\u0102\u0107\5&\24"+
-		"\2\u0103\u0104\7\21\2\2\u0104\u0106\5&\24\2\u0105\u0103\3\2\2\2\u0106"+
-		"\u0109\3\2\2\2\u0107\u0105\3\2\2\2\u0107\u0108\3\2\2\2\u0108\u010a\3\2"+
-		"\2\2\u0109\u0107\3\2\2\2\u010a\u010b\7\27\2\2\u010b)\3\2\2\2\u010c\u010d"+
-		"\7\24\2\2\u010d\u010e\5\"\22\2\u010e\u010f\7\27\2\2\u010f+\3\2\2\2\u0110"+
-		"\u0113\7\25\2\2\u0111\u0114\7\37\2\2\u0112\u0114\5\24\13\2\u0113\u0111"+
-		"\3\2\2\2\u0113\u0112\3\2\2\2\u0114\u0115\3\2\2\2\u0115\u0116\7\31\2\2"+
-		"\u0116-\3\2\2\2\u0117\u011a\7\26\2\2\u0118\u011b\7\37\2\2\u0119\u011b"+
-		"\5\20\t\2\u011a\u0118\3\2\2\2\u011a\u0119\3\2\2\2\u011b\u011c\3\2\2\2"+
-		"\u011c\u011d\7\31\2\2\u011d/\3\2\2\2%\61\649V^binux|\u0085\u0088\u008c"+
-		"\u0095\u009e\u00a1\u00a5\u00ad\u00b5\u00bb\u00c0\u00c6\u00ca\u00d0\u00d8"+
-		"\u00df\u00e3\u00e7\u00f2\u00f7\u00fd\u0107\u0113\u011a";
+		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
+		"\4\32\t\32\3\2\5\2\66\n\2\3\2\5\29\n\2\3\2\7\2<\n\2\f\2\16\2?\13\2\3\2"+
+		"\3\2\3\2\3\3\3\3\3\4\3\4\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\6\3"+
+		"\6\3\6\3\6\3\6\3\7\3\7\3\7\3\7\5\7[\n\7\3\7\3\7\3\7\3\7\3\7\3\7\5\7c\n"+
+		"\7\7\7e\n\7\f\7\16\7h\13\7\3\7\3\7\3\b\3\b\5\bn\n\b\3\b\3\b\3\b\5\bs\n"+
+		"\b\3\t\3\t\5\tw\n\t\3\t\3\t\3\t\5\t|\n\t\3\n\3\n\5\n\u0080\n\n\3\13\3"+
+		"\13\3\13\3\13\3\13\5\13\u0087\n\13\3\13\5\13\u008a\n\13\7\13\u008c\n\13"+
+		"\f\13\16\13\u008f\13\13\3\13\3\13\3\f\3\f\3\f\3\f\5\f\u0097\n\f\3\f\5"+
+		"\f\u009a\n\f\7\f\u009c\n\f\f\f\16\f\u009f\13\f\3\f\3\f\3\r\3\r\3\r\3\r"+
+		"\5\r\u00a7\n\r\3\r\3\r\3\r\3\r\3\r\3\r\3\r\5\r\u00b0\n\r\3\r\5\r\u00b3"+
+		"\n\r\7\r\u00b5\n\r\f\r\16\r\u00b8\13\r\3\r\3\r\3\16\3\16\3\16\5\16\u00bf"+
+		"\n\16\3\16\3\16\3\16\3\16\3\16\3\16\5\16\u00c7\n\16\3\17\3\17\3\17\3\17"+
+		"\5\17\u00cd\n\17\3\20\3\20\3\20\5\20\u00d2\n\20\3\21\3\21\3\21\3\21\5"+
+		"\21\u00d8\n\21\7\21\u00da\n\21\f\21\16\21\u00dd\13\21\3\21\3\21\3\21\5"+
+		"\21\u00e2\n\21\3\22\3\22\3\22\3\22\7\22\u00e8\n\22\f\22\16\22\u00eb\13"+
+		"\22\3\23\3\23\3\23\3\23\5\23\u00f1\n\23\3\24\3\24\5\24\u00f5\n\24\7\24"+
+		"\u00f7\n\24\f\24\16\24\u00fa\13\24\3\25\3\25\3\25\3\25\3\25\3\25\6\25"+
+		"\u0102\n\25\r\25\16\25\u0103\3\25\3\25\3\25\5\25\u0109\n\25\3\25\3\25"+
+		"\3\26\3\26\5\26\u010f\n\26\3\26\3\26\3\26\3\27\3\27\3\27\7\27\u0117\n"+
+		"\27\f\27\16\27\u011a\13\27\3\27\3\27\3\30\3\30\3\30\3\30\3\31\3\31\3\31"+
+		"\5\31\u0125\n\31\3\31\3\31\3\32\3\32\3\32\5\32\u012c\n\32\3\32\3\32\3"+
+		"\32\2\2\33\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\2\3\3"+
+		"\2\"%\2\u0151\2\65\3\2\2\2\4C\3\2\2\2\6E\3\2\2\2\bK\3\2\2\2\nQ\3\2\2\2"+
+		"\fV\3\2\2\2\16m\3\2\2\2\20v\3\2\2\2\22\177\3\2\2\2\24\u0081\3\2\2\2\26"+
+		"\u0092\3\2\2\2\30\u00a2\3\2\2\2\32\u00be\3\2\2\2\34\u00cc\3\2\2\2\36\u00d1"+
+		"\3\2\2\2 \u00e1\3\2\2\2\"\u00e3\3\2\2\2$\u00f0\3\2\2\2&\u00f8\3\2\2\2"+
+		"(\u00fb\3\2\2\2*\u010c\3\2\2\2,\u0113\3\2\2\2.\u011d\3\2\2\2\60\u0121"+
+		"\3\2\2\2\62\u0128\3\2\2\2\64\66\5\6\4\2\65\64\3\2\2\2\65\66\3\2\2\2\66"+
+		"8\3\2\2\2\679\5\b\5\28\67\3\2\2\289\3\2\2\29=\3\2\2\2:<\5,\27\2;:\3\2"+
+		"\2\2<?\3\2\2\2=;\3\2\2\2=>\3\2\2\2>@\3\2\2\2?=\3\2\2\2@A\5.\30\2AB\7\2"+
+		"\2\3B\3\3\2\2\2CD\t\2\2\2D\5\3\2\2\2EF\7\3\2\2FG\7\30\2\2GH\7\36\2\2H"+
+		"I\7\31\2\2IJ\7\27\2\2J\7\3\2\2\2KL\7\4\2\2LM\7\30\2\2MN\7\5\2\2NO\7\31"+
+		"\2\2OP\7\27\2\2P\t\3\2\2\2QR\7\33\2\2RS\7\30\2\2ST\7$\2\2TU\7\31\2\2U"+
+		"\13\3\2\2\2VW\7\34\2\2WZ\7\30\2\2X[\5\4\3\2Y[\5 \21\2ZX\3\2\2\2ZY\3\2"+
+		"\2\2[f\3\2\2\2\\b\7\6\2\2]c\5\4\3\2^c\7\37\2\2_c\5\24\13\2`c\5\30\r\2"+
+		"ac\5 \21\2b]\3\2\2\2b^\3\2\2\2b_\3\2\2\2b`\3\2\2\2ba\3\2\2\2ce\3\2\2\2"+
+		"d\\\3\2\2\2eh\3\2\2\2fd\3\2\2\2fg\3\2\2\2gi\3\2\2\2hf\3\2\2\2ij\7\31\2"+
+		"\2j\r\3\2\2\2kn\5\4\3\2ln\7\37\2\2mk\3\2\2\2ml\3\2\2\2no\3\2\2\2or\7!"+
+		"\2\2ps\5\4\3\2qs\7\37\2\2rp\3\2\2\2rq\3\2\2\2s\17\3\2\2\2tw\5\4\3\2uw"+
+		"\7\37\2\2vt\3\2\2\2vu\3\2\2\2wx\3\2\2\2x{\7 \2\2y|\5\4\3\2z|\7\37\2\2"+
+		"{y\3\2\2\2{z\3\2\2\2|\21\3\2\2\2}\u0080\5\16\b\2~\u0080\5\20\t\2\177}"+
+		"\3\2\2\2\177~\3\2\2\2\u0080\23\3\2\2\2\u0081\u008d\7\7\2\2\u0082\u0087"+
+		"\5\4\3\2\u0083\u0087\7\37\2\2\u0084\u0087\7\32\2\2\u0085\u0087\5 \21\2"+
+		"\u0086\u0082\3\2\2\2\u0086\u0083\3\2\2\2\u0086\u0084\3\2\2\2\u0086\u0085"+
+		"\3\2\2\2\u0087\u0089\3\2\2\2\u0088\u008a\7\6\2\2\u0089\u0088\3\2\2\2\u0089"+
+		"\u008a\3\2\2\2\u008a\u008c\3\2\2\2\u008b\u0086\3\2\2\2\u008c\u008f\3\2"+
+		"\2\2\u008d\u008b\3\2\2\2\u008d\u008e\3\2\2\2\u008e\u0090\3\2\2\2\u008f"+
+		"\u008d\3\2\2\2\u0090\u0091\7\b\2\2\u0091\25\3\2\2\2\u0092\u009d\7\t\2"+
+		"\2\u0093\u0097\5\4\3\2\u0094\u0097\7\37\2\2\u0095\u0097\7\32\2\2\u0096"+
+		"\u0093\3\2\2\2\u0096\u0094\3\2\2\2\u0096\u0095\3\2\2\2\u0097\u0099\3\2"+
+		"\2\2\u0098\u009a\7\6\2\2\u0099\u0098\3\2\2\2\u0099\u009a\3\2\2\2\u009a"+
+		"\u009c\3\2\2\2\u009b\u0096\3\2\2\2\u009c\u009f\3\2\2\2\u009d\u009b\3\2"+
+		"\2\2\u009d\u009e\3\2\2\2\u009e\u00a0\3\2\2\2\u009f\u009d\3\2\2\2\u00a0"+
+		"\u00a1\7\n\2\2\u00a1\27\3\2\2\2\u00a2\u00b6\7\13\2\2\u00a3\u00a7\5\4\3"+
+		"\2\u00a4\u00a7\7\37\2\2\u00a5\u00a7\7\36\2\2\u00a6\u00a3\3\2\2\2\u00a6"+
+		"\u00a4\3\2\2\2\u00a6\u00a5\3\2\2\2\u00a7\u00a8\3\2\2\2\u00a8\u00af\7\f"+
+		"\2\2\u00a9\u00b0\5\4\3\2\u00aa\u00b0\7\37\2\2\u00ab\u00b0\7\36\2\2\u00ac"+
+		"\u00b0\5\24\13\2\u00ad\u00b0\5\26\f\2\u00ae\u00b0\5\30\r\2\u00af\u00a9"+
+		"\3\2\2\2\u00af\u00aa\3\2\2\2\u00af\u00ab\3\2\2\2\u00af\u00ac\3\2\2\2\u00af"+
+		"\u00ad\3\2\2\2\u00af\u00ae\3\2\2\2\u00b0\u00b2\3\2\2\2\u00b1\u00b3\7\6"+
+		"\2\2\u00b2\u00b1\3\2\2\2\u00b2\u00b3\3\2\2\2\u00b3\u00b5\3\2\2\2\u00b4"+
+		"\u00a6\3\2\2\2\u00b5\u00b8\3\2\2\2\u00b6\u00b4\3\2\2\2\u00b6\u00b7\3\2"+
+		"\2\2\u00b7\u00b9\3\2\2\2\u00b8\u00b6\3\2\2\2\u00b9\u00ba\7\n\2\2\u00ba"+
+		"\31\3\2\2\2\u00bb\u00bf\7\37\2\2\u00bc\u00bf\5\26\f\2\u00bd\u00bf\5\24"+
+		"\13\2\u00be\u00bb\3\2\2\2\u00be\u00bc\3\2\2\2\u00be\u00bd\3\2\2\2\u00bf"+
+		"\u00c0\3\2\2\2\u00c0\u00c6\7\r\2\2\u00c1\u00c7\5\4\3\2\u00c2\u00c7\5\n"+
+		"\6\2\u00c3\u00c7\5\30\r\2\u00c4\u00c7\5\60\31\2\u00c5\u00c7\5\62\32\2"+
+		"\u00c6\u00c1\3\2\2\2\u00c6\u00c2\3\2\2\2\u00c6\u00c3\3\2\2\2\u00c6\u00c4"+
+		"\3\2\2\2\u00c6\u00c5\3\2\2\2\u00c7\33\3\2\2\2\u00c8\u00cd\5\22\n\2\u00c9"+
+		"\u00cd\5\32\16\2\u00ca\u00cd\5\f\7\2\u00cb\u00cd\5\4\3\2\u00cc\u00c8\3"+
+		"\2\2\2\u00cc\u00c9\3\2\2\2\u00cc\u00ca\3\2\2\2\u00cc\u00cb\3\2\2\2\u00cd"+
+		"\35\3\2\2\2\u00ce\u00d2\5\4\3\2\u00cf\u00d2\7\37\2\2\u00d0\u00d2\7\36"+
+		"\2\2\u00d1\u00ce\3\2\2\2\u00d1\u00cf\3\2\2\2\u00d1\u00d0\3\2\2\2\u00d2"+
+		"\37\3\2\2\2\u00d3\u00d4\7\36\2\2\u00d4\u00db\7\30\2\2\u00d5\u00d7\5\36"+
+		"\20\2\u00d6\u00d8\7\6\2\2\u00d7\u00d6\3\2\2\2\u00d7\u00d8\3\2\2\2\u00d8"+
+		"\u00da\3\2\2\2\u00d9\u00d5\3\2\2\2\u00da\u00dd\3\2\2\2\u00db\u00d9\3\2"+
+		"\2\2\u00db\u00dc\3\2\2\2\u00dc\u00de\3\2\2\2\u00dd\u00db\3\2\2\2\u00de"+
+		"\u00e2\7\31\2\2\u00df\u00e2\5\60\31\2\u00e0\u00e2\5\62\32\2\u00e1\u00d3"+
+		"\3\2\2\2\u00e1\u00df\3\2\2\2\u00e1\u00e0\3\2\2\2\u00e2!\3\2\2\2\u00e3"+
+		"\u00e4\7\16\2\2\u00e4\u00e9\5\34\17\2\u00e5\u00e6\7\6\2\2\u00e6\u00e8"+
+		"\5\34\17\2\u00e7\u00e5\3\2\2\2\u00e8\u00eb\3\2\2\2\u00e9\u00e7\3\2\2\2"+
+		"\u00e9\u00ea\3\2\2\2\u00ea#\3\2\2\2\u00eb\u00e9\3\2\2\2\u00ec\u00f1\5"+
+		"\34\17\2\u00ed\u00f1\5(\25\2\u00ee\u00f1\7\36\2\2\u00ef\u00f1\5 \21\2"+
+		"\u00f0\u00ec\3\2\2\2\u00f0\u00ed\3\2\2\2\u00f0\u00ee\3\2\2\2\u00f0\u00ef"+
+		"\3\2\2\2\u00f1%\3\2\2\2\u00f2\u00f4\5$\23\2\u00f3\u00f5\7\6\2\2\u00f4"+
+		"\u00f3\3\2\2\2\u00f4\u00f5\3\2\2\2\u00f5\u00f7\3\2\2\2\u00f6\u00f2\3\2"+
+		"\2\2\u00f7\u00fa\3\2\2\2\u00f8\u00f6\3\2\2\2\u00f8\u00f9\3\2\2\2\u00f9"+
+		"\'\3\2\2\2\u00fa\u00f8\3\2\2\2\u00fb\u0101\7\17\2\2\u00fc\u00fd\5\22\n"+
+		"\2\u00fd\u00fe\7\20\2\2\u00fe\u00ff\5\34\17\2\u00ff\u0100\7\21\2\2\u0100"+
+		"\u0102\3\2\2\2\u0101\u00fc\3\2\2\2\u0102\u0103\3\2\2\2\u0103\u0101\3\2"+
+		"\2\2\u0103\u0104\3\2\2\2\u0104\u0108\3\2\2\2\u0105\u0106\7\22\2\2\u0106"+
+		"\u0107\7\20\2\2\u0107\u0109\5\34\17\2\u0108\u0105\3\2\2\2\u0108\u0109"+
+		"\3\2\2\2\u0109\u010a\3\2\2\2\u010a\u010b\7\23\2\2\u010b)\3\2\2\2\u010c"+
+		"\u010e\5 \21\2\u010d\u010f\5\"\22\2\u010e\u010d\3\2\2\2\u010e\u010f\3"+
+		"\2\2\2\u010f\u0110\3\2\2\2\u0110\u0111\7\20\2\2\u0111\u0112\5&\24\2\u0112"+
+		"+\3\2\2\2\u0113\u0118\5*\26\2\u0114\u0115\7\21\2\2\u0115\u0117\5*\26\2"+
+		"\u0116\u0114\3\2\2\2\u0117\u011a\3\2\2\2\u0118\u0116\3\2\2\2\u0118\u0119"+
+		"\3\2\2\2\u0119\u011b\3\2\2\2\u011a\u0118\3\2\2\2\u011b\u011c\7\27\2\2"+
+		"\u011c-\3\2\2\2\u011d\u011e\7\24\2\2\u011e\u011f\5&\24\2\u011f\u0120\7"+
+		"\27\2\2\u0120/\3\2\2\2\u0121\u0124\7\25\2\2\u0122\u0125\7\37\2\2\u0123"+
+		"\u0125\5\30\r\2\u0124\u0122\3\2\2\2\u0124\u0123\3\2\2\2\u0125\u0126\3"+
+		"\2\2\2\u0126\u0127\7\31\2\2\u0127\61\3\2\2\2\u0128\u012b\7\26\2\2\u0129"+
+		"\u012c\7\37\2\2\u012a\u012c\5\24\13\2\u012b\u0129\3\2\2\2\u012b\u012a"+
+		"\3\2\2\2\u012c\u012d\3\2\2\2\u012d\u012e\7\31\2\2\u012e\63\3\2\2\2(\65"+
+		"8=Zbfmrv{\177\u0086\u0089\u008d\u0096\u0099\u009d\u00a6\u00af\u00b2\u00b6"+
+		"\u00be\u00c6\u00cc\u00d1\u00d7\u00db\u00e1\u00e9\u00f0\u00f4\u00f8\u0103"+
+		"\u0108\u010e\u0118\u0124\u012b";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
